@@ -129,7 +129,7 @@ g=()=>{
 
 
 
-genrateTable();
+// genrateTable();
 // g();
 
 module.exports = conn;
