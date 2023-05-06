@@ -1,9 +1,11 @@
 const { DataTypes } = require("sequelize");
 const db = require("../database");
 const Seller = require("./SellerModel");
+const Customer = require("./CustomerModel");
+const Medicine = require('./MedicineModel')
 
-const Medicine = db.define(
-  "medicine",
+const MedicineHistory = db.define(
+  "MedicineHistory",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -50,22 +52,19 @@ const Medicine = db.define(
       type:DataTypes.INTEGER,
       allowNull:false
     },
-    image:
-    {
-      type: DataTypes.TEXT,
-      allowNull:true
-    },
     about: {
       type: DataTypes.STRING,
       allowNull: true,
     },
   },
   {
-    tableName: "medicine",
+    tableName: "MedicineHistory",
     timestamps: false,
   }
 );
 
-Medicine.belongsTo(Seller, { foreignKey: "sellerId" });
+MedicineHistory.belongsTo(Seller, { foreignKey: "sellerId" });
+MedicineHistory.belongsTo(Customer, { foreignKey: "customerId" });
+MedicineHistory.belongsTo(Medicine, { foreignKey: "medicineId" });
 
-module.exports = Medicine;
+module.exports = MedicineHistory;
