@@ -100,6 +100,7 @@ let genrateTable = () => {
       foreign key (medicinesId) references medicine (id)
     )`
     );
+};
 
     conn.query(`
     create table Customer_Order_History (
