@@ -5,6 +5,6 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
   dialect: "mysql",
 });
 
-conn.query('select * from fc', (req, res)=>{
-    console.log('connext');
-})
+
+
+module.exports = conn;

@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../database");
 
-const Distributor = db.define(
-  "Distributor",
+const Retailer = db.define(
+  "Retailer",
   {
     fc_id: {
       type: DataTypes.INTEGER,
@@ -74,16 +74,16 @@ const Distributor = db.define(
   },
 
   {
-    tableName: "Distributor",
+    tableName: "Retailer",
     timestamps: false,
   }
 );
 
-const FC = require('./FC')
+const Distributor = require('./Distributor')
 
-Distributor.belongsTo(FC, {
+Retailer.belongsTo(Distributor, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });
 
-module.exports = Distributor;
+module.exports = Retailer;
