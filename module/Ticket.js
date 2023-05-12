@@ -33,8 +33,8 @@ const Distributor = require("./Distributor");
 const Retailer = require("./Retailer");
 const Transaction_hist = require("./Transaction_hist");
 
-Ticket.belongsTo(Distributor, { foreignKey: dist_id });
-Ticket.belongsTo(Retailer, { foreignKey: id });
-Ticket.belongsTo(Transaction_hist, { foreignKey: transaction_id });
+Ticket.belongsTo(Distributor);
+Ticket.belongsTo(Retailer);
+Ticket.belongsTo(Transaction_hist);
 
 module.exports = Ticket;

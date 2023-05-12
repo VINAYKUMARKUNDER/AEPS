@@ -4,7 +4,7 @@ const db = require("../database");
 const Distributor = db.define(
   "Distributor",
   {
-    fc_id: {
+    dist_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,

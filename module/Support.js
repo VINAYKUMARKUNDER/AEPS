@@ -26,8 +26,6 @@ const Support = db.define(
 );
 
 const Retailer = require("./Retailer");
-Support.belongsTo(Retailer, {
-  foreignKey: id,
-});
+Support.belongsTo(Retailer);
 
 module.exports = Support;

@@ -29,8 +29,8 @@ const Distributor = require("./Distributor");
 const Retailer = require("./Retailer");
 const Transaction_hist = require("./Transaction_hist");
 
-Activity.belongsTo(Distributor, { foreignKey: dist_id });
-Activity.belongsTo(Retailer, { foreignKey: id });
-Activity.belongsTo(Transaction_hist, { foreignKey: transaction_id });
+Activity.belongsTo(Distributor);
+Activity.belongsTo(Retailer);
+Activity.belongsTo(Transaction_hist);
 
 module.exports = Activity;
