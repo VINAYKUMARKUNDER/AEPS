@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
-const Transaction_historyModule = require("../module/Transaction_hist");
+const TicketModule = require("../module/Ticket");
 
 // get all entry
 router.get("/", async (req, res) => {
   try {
-    const data = await Transaction_historyModule.findAll();
+    const data = await TicketModule.findAll();
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json(error);
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 // get entry by id
 router.get("/:id", async (req, res) => {
   try {
-    const data = await Transaction_historyModule.findByPk(req.params.id);
+    const data = await TicketModule.findByPk(req.params.id);
     if (!data) res.status(200).json("data not found with id: ", req.params.id);
     else res.status(200).json(data);
   } catch (error) {
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
 // create new entry
 router.post("/", async (req, res) => {
   try {
-    const data = await Transaction_historyModule.create(req.body);
+    const data = await TicketModule.create(req.body);
     res.status(201).json("new entry created successfully...");
   } catch (error) {
     res.status(500).json(error);
@@ -37,9 +37,9 @@ router.post("/", async (req, res) => {
 // updated entry by id
 router.put("/:id", async (req, res) => {
   try {
-    const data = await Transaction_historyModule.update(req.body, {
+    const data = await TicketModule.update(req.body, {
       where: {
-        transaction_id: req.params.id,
+        ticket_id: req.params.id,
       },
     });
     if (data[0] == 1) res.status(200).json("updated successfully...");
@@ -52,9 +52,9 @@ router.put("/:id", async (req, res) => {
 // deleted entry by id
 router.delete("/:id", async (req, res) => {
   try {
-    const data = await Transaction_historyModule.destroy({
+    const data = await TicketModule.destroy({
       where: {
-        transaction_id: req.params.id,
+        ticket_id: req.params.id,
       },
     });
     if (data == 0)
