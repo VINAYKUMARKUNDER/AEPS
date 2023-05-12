@@ -29,8 +29,17 @@ const Distributor = require("./Distributor");
 const Retailer = require("./Retailer");
 const Transaction_hist = require("./Transaction_hist");
 
-Activity.belongsTo(Distributor);
-Activity.belongsTo(Retailer);
-Activity.belongsTo(Transaction_hist);
+Activity.belongsTo(Distributor, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
+Activity.belongsTo(Retailer, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
+Activity.belongsTo(Transaction_hist, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
 
 module.exports = Activity;

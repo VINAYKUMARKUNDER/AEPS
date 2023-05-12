@@ -33,8 +33,17 @@ const Distributor = require("./Distributor");
 const Retailer = require("./Retailer");
 const Transaction_hist = require("./Transaction_hist");
 
-Ticket.belongsTo(Distributor);
-Ticket.belongsTo(Retailer);
-Ticket.belongsTo(Transaction_hist);
+Ticket.belongsTo(Distributor, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
+Ticket.belongsTo(Retailer, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
+Ticket.belongsTo(Transaction_hist, {
+    foreignKey: { allowNull: false },
+    onDelete: "CASCADE",
+  });
 
 module.exports = Ticket;

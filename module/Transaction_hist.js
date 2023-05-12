@@ -32,7 +32,10 @@ const Transaction_history = db.define(
 );
 
 const Retailer = require('./Retailer')
-Transaction_history.belongsTo(Retailer);
+Transaction_history.belongsTo(Retailer, {
+  foreignKey: { allowNull: false },
+  onDelete: "CASCADE",
+});
 
 module.exports = Transaction_history;
 

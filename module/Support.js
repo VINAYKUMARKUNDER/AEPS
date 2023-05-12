@@ -26,6 +26,9 @@ const Support = db.define(
 );
 
 const Retailer = require("./Retailer");
-Support.belongsTo(Retailer);
+Support.belongsTo(Retailer, {
+  foreignKey: { allowNull: false },
+  onDelete: "CASCADE",
+});
 
 module.exports = Support;
