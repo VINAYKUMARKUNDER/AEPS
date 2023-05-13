@@ -71,6 +71,12 @@ const FC = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    type: {
+
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    
   },
 
   {

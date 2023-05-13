@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const bcrypt = require('bcrypt')
 const db = require("../database");
 const FcModule = require("../module/FC");
 
@@ -27,7 +27,11 @@ router.get("/:id", async (req, res) => {
 // create new entry
 router.post("/", async (req, res) => {
   try {
-    const data = await FcModule.create(req.body);
+    const rawData = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawData.password, salt);
+    rawData.password=hash;
+    const data = await FcModule.create(rawData);
     res.status(201).json((msg = "new data create successfully..."));
   } catch (error) {
     res.status(500).json(error);

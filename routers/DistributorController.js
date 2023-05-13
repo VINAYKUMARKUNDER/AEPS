@@ -1,7 +1,8 @@
 
 const express = require('express');
 const router = express.Router();
-const db = require('../database')
+const db = require('../database') 
+const bcrypt = require('bcrypt')
 const distributorModule = require('../module/Distributor')
 
 
@@ -19,6 +20,7 @@ router.get('/', async (req, res)=>{
 // get one entry by id
 router.get('/:id', async (req, res)=>{
     try {
+       
         const data = await distributorModule.findByPk(req.params.id);
         if(!data)res.status(200).json('data not found with id:',req.params.id);
         else res.status(200).json(data);
@@ -30,7 +32,11 @@ router.get('/:id', async (req, res)=>{
 // create new entry
 router.post('/', async (req, res)=>{
     try {
-        const data = await distributorModule.create(req.body);
+        const rawData = req.body;
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(rawData.password, salt);
+        rawData.password=hash;
+        const data = await distributorModule.create(rawData);
         res.status(201).json('created new entry successfully...');
     } catch (error) {
         res.status(500).json(error);

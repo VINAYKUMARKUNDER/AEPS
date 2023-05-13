@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const db = require("../database");
 
+
+
 const Activity = db.define(
   "activity",
   {
