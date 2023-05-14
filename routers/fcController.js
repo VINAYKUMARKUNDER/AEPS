@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 const db = require("../database");
 const FcModule = require("../module/FC");
 
@@ -18,7 +18,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const data = await FcModule.findByPk(req.params.id);
-    res.status(200).json(data);
+    if (!data)
+      res.status(200).json(`Data not found with fc id :${req.params.id}`);
+    else res.status(200).json(data);
   } catch (error) {
     res.status(200).json(error);
   }
@@ -30,7 +32,7 @@ router.post("/", async (req, res) => {
     const rawData = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawData.password, salt);
-    rawData.password=hash;
+    rawData.password = hash;
     const data = await FcModule.create(rawData);
     res.status(201).json((msg = "new data create successfully..."));
   } catch (error) {
@@ -41,13 +43,18 @@ router.post("/", async (req, res) => {
 // update entry
 router.put("/:id", async (req, res) => {
   try {
-    const data = await FcModule.update(req.body, {
-      where: {
-        fc_id: req.params.id,
-      },
-    });
-    if (data[0] == 0) res.status(200).json("already updated...");
-    else res.status(200).json("update successfully....");
+    const find = await FcModule.findByPk(req.params.id);
+    if (!find)
+      res.status(200).json(`Data not found with fc id :${req.params.id}`);
+    else {
+      const data = await FcModule.update(req.body, {
+        where: {
+          fc_id: req.params.id,
+        },
+      });
+      if (data[0] == 0) res.status(200).json("already updated...");
+      else res.status(200).json("update successfully....");
+    }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -62,7 +69,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (data == 1) res.status(200).json("deleted successfully");
-    else res.status(200).json("data not found...");
+    else res.status(200).json(`Data not found with fc id :${req.params.id}`);
   } catch (error) {
     res.status(500).json(error);
   }
