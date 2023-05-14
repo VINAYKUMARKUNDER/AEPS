@@ -1,14 +1,23 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; 
+const secretKey = 'aaaaaaaaaaaaa'; 
 
 
-function generateToken(user) {
+const generateToken=(user)=>{
   const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
   return token;
+};
+
+user={
+  name:'vinay kumar',
+  password:'Vinay@1313',
+  email:'Vinay@1313'
 }
 
+const token = generateToken(user);
+console.log(token)
 
-function verifyToken(req, res, next) {
+
+const verifyToken=(req, res, next)=> {
   const token = req.headers.authorization;
 
   if (!token) {
@@ -22,4 +31,4 @@ function verifyToken(req, res, next) {
     req.user = decoded;
     next();
   });
-}
+};
