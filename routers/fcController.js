@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const db = require("../database");
 const FcModule = require("../module/FC");
+const jwttoken = require('./AuthController')
 
 // get all fc data
 router.get("/", async (req, res) => {
@@ -34,11 +35,20 @@ router.post("/", async (req, res) => {
     const hash = bcrypt.hashSync(rawData.password, salt);
     rawData.password = hash;
     const data = await FcModule.create(rawData);
+    const user={
+      name:rawData.name,
+      email:rawData.email,
+      password:rawData.password
+    }
+    const token = jwttoken.generateToken(user);
+    console.log(token)
     res.status(201).json((msg = "new data create successfully..."));
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
+
 
 // update entry
 router.put("/:id", async (req, res) => {

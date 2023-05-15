@@ -29,6 +29,15 @@ app.use('/api/v1/trans',Transaction_histRoutes);
 app.use('/api/v1/support',SupportRoutes);
 
 
+app.use((err, req, res , next)=>{
+        res.status(500).json({
+            error: {
+                status:500,
+                massege:err.massege
+            }
+        })
+})
+
 app.listen(3000,()=>{
     console.log('port is running...');
 });
