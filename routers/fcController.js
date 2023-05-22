@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const db = require("../database");
 const FcModule = require("../module/FC");
-const jwttoken = require('./AuthController')
+const jwttoken = require('./AuthController');
 
 // get all fc data
 router.get("/", async (req, res) => {
@@ -14,6 +14,9 @@ router.get("/", async (req, res) => {
     res.status(200).json(error);
   }
 });
+
+
+
 
 // find by id
 router.get("/:id", async (req, res) => {
@@ -26,6 +29,9 @@ router.get("/:id", async (req, res) => {
     res.status(200).json(error);
   }
 });
+
+
+
 
 // create new entry
 router.post("/", async (req, res) => {
@@ -70,6 +76,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+
+
+
 // deleted enrty by id
 router.delete("/:id", async (req, res) => {
   try {
@@ -84,5 +93,8 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+
+
 
 module.exports = router;
