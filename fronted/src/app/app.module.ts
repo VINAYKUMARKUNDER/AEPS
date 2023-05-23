@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ContainerComponent } from './container/container.component';
@@ -17,6 +19,61 @@ import { AboutComponent } from './other/about/about.component';
 import { ContectComponent } from './other/contect/contect.component';
 import { ProfileComponent } from './other/profile/profile.component';
 import { HomeComponent } from './other/home/home.component';
+
+
+
+
+const routes: Routes = [
+  {
+    component:AboutComponent,
+    path:'about'
+  },
+  {
+    component:HomeComponent,
+    path:''
+  },
+  {
+    component:ProfileComponent,
+    path:'profile'
+  },
+  {
+    component:ContectComponent,
+    path:'contect'
+  },
+  {
+    component:ActivityComponent,
+    path:'activity'
+  },
+  {
+    component:DistributorComponent,
+    path:'distributor'
+  },
+  {
+    component:FCComponent,
+    path:'fc'
+  },
+  {
+    component:RetailerComponent,
+    path:'retailer'
+  },
+  {
+    component:ServiceComponent,
+    path:'service'
+  },
+  {
+    component:TicketComponent,
+    path:'ticket'
+  },
+  {
+    component:TransactionHistComponent,
+    path:'transaction'
+  },
+  {
+    component:UserComponent,
+    path:'user'
+  }
+];
+
 
 @NgModule({
   declarations: [
@@ -38,7 +95,9 @@ import { HomeComponent } from './other/home/home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
