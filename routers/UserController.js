@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const UserModule = require("../module/User");
+const ReatilerModule = require("../module/Retailer");
+const FcModule = require("../module/FC");
+const DistributorModule = require("../module/Distributor");
 
 // get all entry
 router.get("/", async (req, res) => {
@@ -65,16 +68,48 @@ router.get("/", async (req, res) => {
 //   }
 // });
 
-
 // login user
-router.post('/', async (req , res)=>{
-    try {
-        
-        
-    } catch (error) {
-        
-    }
+router.post("/login", async (req, res) => {
+  try {
+    const rawData = req.body;
+    const type = rawData.type;
+    const originalData=await getDataByType(rawData.email, rawData.type);
+    
+    console.log(originalData[0][0]);
+    return res.status(200).json(originalData[0][0]);
+   
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
-})
+
+const getDataByType = async (email, type)=>{
+    if (type.toLowerCase("fc")) {
+        const data = await db.query(
+        `Select * from Fc where email = '${email}'`,
+        (err, result) => {}
+        );
+        return data;
+     
+    }
+    else if (type.toLowerCase("distributor")) {
+         const data = await db.query(
+          `Select * from distributor where email = '${email}'`,
+          (err, result) => {}
+        );
+        return data;
+      }
+
+      else if (type.toLowerCase("retailer")) {
+        const data =  await db.query(
+          `Select * from retailer where email = '${email}'`,
+          (err, result) => {}
+        );
+        return data;
+    }
+    else return ('put valid type')
+    
+}
 
 module.exports = router;
