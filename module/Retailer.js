@@ -82,7 +82,7 @@ const Retailer = db.define(
 const Distributor = require('./Distributor')
 
 Retailer.belongsTo(Distributor, {
-    foreignKey: { allowNull: false },
+    foreignKey: { allowNull: false, name: "distibuter_id" },
     onDelete: "CASCADE",
   });
 

@@ -50,14 +50,6 @@ const Distributor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    area_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    bio: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -82,7 +74,7 @@ const Distributor = db.define(
 const FC = require('./FC')
 
 Distributor.belongsTo(FC, {
-    foreignKey: { allowNull: false },
+    foreignKey: { allowNull: false, name: 'fc_id'},
     onDelete: "CASCADE",
   });
 

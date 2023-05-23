@@ -27,11 +27,14 @@ router.get("/:id", async (req, res) => {
 
 // create new entry
 router.post("/", async (req, res) => {
+  console.log(req.body)
   try {
     const rawData = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawData.password, salt);
     rawData.password = hash;
+   
+    console.log(rawData)
     const data = await distributorModule.create(rawData);
     res.status(201).json("created new entry successfully...");
   } catch (error) {

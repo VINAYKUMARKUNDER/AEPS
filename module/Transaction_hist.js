@@ -6,7 +6,9 @@ const Transaction_history = db.define(
   {
     transaction_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      autoIncrement:true,
+      primaryKey:true
     },
     description: {
       type: DataTypes.STRING,
@@ -16,10 +18,7 @@ const Transaction_history = db.define(
       type: DataTypes.DOUBLE,
       allowNull:false
     },
-    transaction_date: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
+    
     transaction_type: {
       type: DataTypes.STRING,
       allowNull: false
@@ -33,7 +32,7 @@ const Transaction_history = db.define(
 
 const Retailer = require('./Retailer')
 Transaction_history.belongsTo(Retailer, {
-  foreignKey: { allowNull: false },
+  foreignKey: { allowNull: false, name:'retailer_id' },
   onDelete: "CASCADE",
 });
 
