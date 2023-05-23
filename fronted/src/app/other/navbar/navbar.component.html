@@ -70,7 +70,7 @@
           </a>
           <a
             routerLink="service"
-            class="list-group-item list-group-item-action py-2 ripple active"
+            class="list-group-item list-group-item-action py-2 ripple"
           >
             <i class="fa fa-cogs fa-fw me-3"></i
             ><span>Service</span>
@@ -96,16 +96,11 @@
           >
             <i class="fa fa-line-chart fa-fw me-3"></i><span>Analize</span>
           </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a
-          >
 
           <a href="#" class="list-group-item list-group-item-action py-2 ripple"
             ><i class="fas fa-building fa-fw me-3"></i><span>Partners</span></a
           >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a
-          >
+
           <a href="#" class="list-group-item list-group-item-action py-2 ripple"
             ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
           >
@@ -119,16 +114,14 @@
         </div>
       </div>
     </nav>
-    <!-- Sidebar -->
 
-    <!-- Navbar -->
     <nav
       id="main-navbar"
       class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
     >
-      <!-- Container wrapper -->
+
       <div class="container-fluid">
-        <!-- Toggle button -->
+
         <button
           class="navbar-toggler"
           type="button"
@@ -141,13 +134,12 @@
           <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">
+
+        <a class="navbar-brand" routerLink="">
           <img
             src="data:image/png;base64,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"
             height="25"
             alt="AEPS Logo"
-            loading="lazy"
           />
         </a>
         <!-- Search form -->
@@ -164,38 +156,8 @@
           ></span>
         </form>
 
-        <!-- Right links -->
+
         <ul class="navbar-nav ms-auto d-flex flex-row">
-          <!-- Notification dropdown -->
-          <!-- <li class="nav-item dropdown">
-            <a
-              class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="fas fa-bell"></i>
-              <span class="badge rounded-pill badge-notification bg-danger"
-                >1</span
-              >
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <li>
-                <a class="dropdown-item" href="#">Some news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Another news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-            </ul>
-          </li> -->
 
 
 
@@ -234,15 +196,9 @@
           </li>
         </ul>
       </div>
-      <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-  </header>
-  <!--Main Navigation-->
 
-  <!--Main layout-->
-  <main style="margin-top: 58px">
-    <div class="container pt-4"></div>
-  </main>
-  <!--Main layout-->
+    </nav>
+
+  </header>
+
 </div>

@@ -1,0 +1,35 @@
+<main class="main container pt-4">
+  <h3 class="text-center">Fc crud opt</h3>
+  <div class="btn-flex p-7">
+    <button class="btn btn-success" (click)="changeStatus('create')">
+      Create new
+    </button>
+    <button class="btn btn-primary" (click)="changeStatus('update')">
+      Update
+    </button>
+    <button class="btn btn-warning" (click)="changeStatus('view')">View</button>
+    <button class="btn btn-danger" (click)="changeStatus('delete')">
+      Delete
+    </button>
+  </div>
+
+  <!-- create new fc -->
+  <section *ngIf="status == 'create'">
+    <h1>create</h1>
+  </section>
+
+  <!-- update fc -->
+  <section *ngIf="status == 'update'">
+    <h1>update</h1>
+  </section>
+
+  <!-- view fc -->
+  <section *ngIf="status == 'view'">
+    <h1>view</h1>
+  </section>
+
+  <!-- delete fc -->
+  <section *ngIf="status == 'delete'">
+    <h1>delete</h1>
+  </section>
+</main>
