@@ -33,8 +33,6 @@ router.post("/", async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawData.password, salt);
     rawData.password = hash;
-   
-    console.log(rawData)
     const data = await distributorModule.create(rawData);
     res.status(201).json("created new entry successfully...");
   } catch (error) {

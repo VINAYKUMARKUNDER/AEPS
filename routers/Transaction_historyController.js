@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const Transaction_historyModule = require("../module/Transaction_hist");
-const ReatilerModule = require('../module/Retailer')
+const ReatilerModule = require("../module/Retailer");
 
 // get all entry
 router.get("/", async (req, res) => {
   try {
     const data = await Transaction_historyModule.findAll();
-    res.status(200).json(data);
+    return res.status(200).json(data);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
 
@@ -18,52 +18,86 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const data = await Transaction_historyModule.findByPk(req.params.id);
-    if (!data) res.status(200).json("data not found with id: ", req.params.id);
-    else res.status(200).json(data);
+    if (!data)
+      return res.status(200).json("data not found with id: ", req.params.id);
+    else return res.status(200).json(data);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
-
 
 // get all transaction by retailer id
-router.get('/retailer/:id', async (req, res)=>{
+router.get("/retailer/:id", async (req, res) => {
   try {
-    const data = await db.query(`select * from transaction_history where retailer_id=${req.params.id}`, (err, result)=>{
-
-    })
-    if(data[0].length==0)res.status(200).json(`data not found with retailer id ${req.params.id}`);
-    else res.status(200).json(data[0])
-    
+    const data = await db.query(
+      `select * from transaction_history where retailer_id=${req.params.id}`,
+      (err, result) => {}
+    );
+    if (data[0].length == 0)
+      return res
+        .status(200)
+        .json(`data not found with retailer id ${req.params.id}`);
+    else return res.status(200).json(data[0]);
   } catch (error) {
-    res.status(500).json(error)
+    return res.status(500).json(error);
   }
-
 });
 
-// find all trancation by distibutre id
-router.get('/dist/:id', async (req, res)=>{
+// find all trancation by distributor id
+router.get("/dist/:id", async (req, res) => {
   try {
-    const data =  await db.query(`select * from Retailer where distibuter_id = ${req.params.id}`, (err, result)=>{
+    const data = await db.query(
+      `SELECT th.* FROM transaction_history th JOIN retailer r ON th.retailer_id = r.id
+    JOIN distributor d ON r.distibuter_id = d.dist_id WHERE d.dist_id = ${req.params.id}`,
+      (err, result) => {}
+    );
 
-    })
-    console.log(data)
-    res.status(200).json(data[0])
+    if (data[0].length == 0)
+      return res
+        .status(200)
+        .json(`data not found with distributor id ${req.params.id}`);
+    else return res.status(200).json(data[0]);
   } catch (error) {
-    
+    return res.status(500).json(error);
   }
-})
+});
+
+// get all transaction between todays
+router.get("/:start/:end", async (req, res) => {
+  try {
+    const start = convertDateFormat(req.params.start);
+    const end = convertDateFormat(req.params.end);
+    const sStart = new Date(start);
+    const sEnd = new Date(end);
+    var currentDate = new Date();
+    console.log(start, currentDate, end)
+    if(sStart > currentDate )return res.status(200).json('must be date is not future')
+
+    const data = await db.query(
+      `SELECT * FROM transaction_history
+    WHERE transaction_date >= '${start}' AND transaction_date <= '${end}'`,
+      (err, result) => {}
+    );
+    if (data[0].length == 0)
+      return res
+        .status(200)
+        .json(`data not found bitween dates ${start} and ${end}`);
+    else return res.status(200).json(data[0]);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
 // create new entry
 router.post("/", async (req, res) => {
   try {
     const rawData = req.body;
-    rawData.transaction_date = '2022-02-03'
-    console.log(rawData)
+    rawData.transaction_date = "2022-02-03";
+    console.log(rawData);
     const data = await Transaction_historyModule.create(rawData);
-    res.status(201).json("new entry created successfully...");
+    return res.status(201).json("new entry created successfully...");
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
 
@@ -75,10 +109,10 @@ router.put("/:id", async (req, res) => {
         transaction_id: req.params.id,
       },
     });
-    if (data[0] == 1) res.status(200).json("updated successfully...");
-    else res.status(200).json("already updated...");
+    if (data[0] == 1) return res.status(200).json("updated successfully...");
+    else return res.status(200).json("already updated...");
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
 
@@ -91,11 +125,20 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (data == 0)
-      res.status(200).json("entry not found with id: ", req.params.id);
-    else res.status.json("deleted successfully...");
+      return res.status(200).json("entry not found with id: ", req.params.id);
+    else return res.status.json("deleted successfully...");
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
+
+const convertDateFormat = (rawDate) => {
+  let date = new Date(rawDate);
+  let year = date.getFullYear();
+  let month = ("0" + (date.getMonth() + 1)).slice(-2);
+  let day = ("0" + date.getDate()).slice(-2);
+  let formattedDate = year + "-" + month + "-" + day;
+  return formattedDate;
+};
 
 module.exports = router;
