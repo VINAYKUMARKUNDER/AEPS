@@ -11,6 +11,12 @@ import { DistributorComponent } from './components/distributor/distributor.compo
 import { RetailerComponent } from './components/retailer/retailer.component';
 import { ServiceComponent } from './components/service/service.component';
 import { TransactionHistComponent } from './components/transaction-hist/transaction-hist.component';
+import { NavbarComponent } from './other/navbar/navbar.component';
+import { FooterComponent } from './other/footer/footer.component';
+import { AboutComponent } from './other/about/about.component';
+import { ContectComponent } from './other/contect/contect.component';
+import { ProfileComponent } from './other/profile/profile.component';
+import { HomeComponent } from './other/home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { TransactionHistComponent } from './components/transaction-hist/transact
     DistributorComponent,
     RetailerComponent,
     ServiceComponent,
-    TransactionHistComponent
+    TransactionHistComponent,
+    NavbarComponent,
+    FooterComponent,
+    AboutComponent,
+    ContectComponent,
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule
