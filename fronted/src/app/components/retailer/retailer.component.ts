@@ -24,14 +24,14 @@ export class RetailerComponent implements OnInit{
 
   retailerCreate(value:any){
     this.http.post(`${this.URL}retailer/`, value).subscribe({
-      next:res=>{alert(res)
-      console.log(res)},
-      error:err=>{alert(err)
-      console.log(err)}
+      next:res=>alert(res),
+      error:err=>alert(err)
     })
   }
 
-
+  retailerView(){
+    
+  }
 
 
 }
