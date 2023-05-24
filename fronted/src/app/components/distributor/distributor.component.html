@@ -14,9 +14,208 @@
   </div>
 
   <!-- create new Distributor -->
-  <section *ngIf="status == 'create'">
-    <h1>create</h1>
-  </section>
+      <section *ngIf="status == 'create'">
+        <div class="col-lg-6 offset-lg-3 mt-2">
+          <h4 class="text-center mb-2">Create new Distributer account</h4>
+          <form #mData="ngForm" class="form-disign"  (ngSubmit)="fcCreate(mData.value)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                ngModel
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                ngModel
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="mobile">Mobile nu.</label>
+              <input
+                type="number"
+                class="form-control"
+                id="mobile"
+                name="mobile"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="house_no">House nu.</label>
+              <input
+                type="text"
+                class="form-control"
+                id="house_no"
+                name="house_no"
+                ngModel
+                required
+              />
+            </div>
+
+
+            <div class="form-group">
+              <label for="street">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                id="street"
+                name="street"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="village">Village</label>
+              <input
+                type="text"
+                class="form-control"
+                id="village"
+                name="village"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="thana">thana</label>
+              <input
+                type="text"
+                class="form-control"
+                id="thana"
+                name="thana"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="sub_district">Sub District</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sub_district"
+                name="sub_district"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="district">District</label>
+              <input
+                type="text"
+                class="form-control"
+                id="district"
+                name="district"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="state">State</label>
+              <input
+                type="text"
+                class="form-control"
+                id="state"
+                name="state"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                name="country"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="pincode">Pincode</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pincode"
+                name="pincode"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="area_name">Working area</label>
+              <input
+                type="text"
+                class="form-control"
+                id="area_name"
+                name="area_name"
+                ngModel
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <input
+                type="text"
+                class="form-control"
+                id="bio"
+                name="bio"
+                ngModel
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                ngModel
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="fc_id">Fc id</label>
+              <input
+                type="number"
+                class="form-control"
+                id="fc_id"
+                name="fc_id"
+                ngModel
+                required
+              />
+            </div>
+
+
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
 
   <!-- update Distributor -->
   <section *ngIf="status == 'update'">
