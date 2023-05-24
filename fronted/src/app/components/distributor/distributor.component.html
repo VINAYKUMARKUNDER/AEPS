@@ -17,7 +17,7 @@
       <section *ngIf="status == 'create'">
         <div class="col-lg-6 offset-lg-3 mt-2">
           <h4 class="text-center mb-2">Create new Distributer account</h4>
-          <form #mData="ngForm" class="form-disign"  (ngSubmit)="fcCreate(mData.value)">
+          <form #mData="ngForm" class="form-disign"  (ngSubmit)="distributorCreate(mData.value)">
             <div class="form-group">
               <label for="name">Name</label>
               <input

@@ -22,7 +22,7 @@ export class DistributorComponent implements OnInit{
   }
 
 
-  fcCreate(value:any){
+  distributorCreate(value:any){
     console.log(value)
     this.http.post(`${this.URL}fc/`, value).subscribe({
       next:res=>{alert(res)

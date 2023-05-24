@@ -17,7 +17,7 @@
     <section *ngIf="status == 'create'">
       <div class="col-lg-6 offset-lg-3 mt-2">
         <h4 class="text-center mb-2">Create new Retailer account</h4>
-        <form #mData="ngForm" class="form-disign"  (ngSubmit)="fcCreate(mData.value)">
+        <form #mData="ngForm" class="form-disign"  (ngSubmit)="retailerCreate(mData.value)">
           <div class="form-group">
             <label for="name">Name</label>
             <input
@@ -224,7 +224,20 @@
 
   <!-- view Retailer -->
   <section *ngIf="status == 'view'">
-    <h1>view</h1>
+    <div class="container">
+      <div class="user-details">
+        <h2>User Details</h2>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> johndoe@example.com</p>
+        <p><strong>Phone:</strong> +1 123-456-7890</p>
+        <p><strong>Address:</strong> 123 Street, City, Country</p>
+      </div>
+
+      <h2>Additional Information</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget lacus velit. Donec aliquam metus quis elit tincidunt convallis.</p>
+      <p>Proin sed lectus non tellus vulputate congue. Integer gravida est in diam euismod, vel aliquet magna hendrerit.</p>
+      <p>Etiam commodo tempor orci, id consequat velit convallis sed. In fermentum tellus vel purus volutpat efficitur.</p>
+    </div>
   </section>
 
   <!-- delete Retailer -->

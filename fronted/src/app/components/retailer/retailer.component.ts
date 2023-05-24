@@ -22,7 +22,7 @@ export class RetailerComponent implements OnInit{
   }
 
 
-  fcCreate(value:any){
+  retailerCreate(value:any){
     this.http.post(`${this.URL}retailer/`, value).subscribe({
       next:res=>{alert(res)
       console.log(res)},
@@ -30,5 +30,8 @@ export class RetailerComponent implements OnInit{
       console.log(err)}
     })
   }
+
+
+
 
 }
