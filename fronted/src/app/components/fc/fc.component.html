@@ -15,7 +15,152 @@
 
   <!-- create new fc -->
   <section *ngIf="status == 'create'">
-    <h1>create</h1>
+    <div class="col-lg-6 offset-lg-3 mt-2">
+      <h4 class="text-center mb-2">Create new FC account</h4>
+      <form #mData="ngForm" class="form-disign">
+        <div class="form-group">
+          <label for="name">product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            name="productName"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="mfgcompany">mfg company</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mfgcompany"
+            name="mfgcompany"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="mfgdate">mfgdate</label>
+          <input
+            type="date"
+            class="form-control"
+            id="mfgdate"
+            name="mfgdate"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="unit">unit</label>
+          <input
+            type="number"
+            class="form-control"
+            id="unit"
+            name="unit"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="expdate">expdate</label>
+          <input
+            type="date"
+            class="form-control"
+            id="expdate"
+            name="expdate"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="type">type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="type"
+            name="type"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="price">price</label>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            name="price"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="batchid">batchid</label>
+          <input
+            type="text"
+            class="form-control"
+            id="batchid"
+            name="batchid"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="totalLeafInOneBox">totalLeafInOneBox</label>
+          <input
+            type="number"
+            class="form-control"
+            id="totalLeafInOneBox"
+            name="totalLeafInOneBox"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="numberOfItemInOneLeaf">numberOfItemInOneLeaf</label>
+          <input
+            type="number"
+            class="form-control"
+            id="numberOfItemInOneLeaf"
+            name="numberOfItemInOneLeaf"
+            ngModel
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="about">about</label>
+          <input
+            type="text"
+            class="form-control"
+            id="about"
+            name="about"
+            ngModel
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="sellerId">sellerId</label>
+          <input
+            type="number"
+            class="form-control"
+            id="sellerId"
+            name="sellerId"
+            ngModel
+            required
+          />
+        </div>
+        <!-- <form (submit)="onSubmit()">
+          <input type="file" (change)="onFileSelected($event)" required />
+          <button type="submit">Upload</button>
+        </form> -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
   </section>
 
   <!-- update fc -->
