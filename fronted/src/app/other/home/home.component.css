@@ -1,5 +1,22 @@
 
 .main{
   margin-top: 60px;
-  margin-left:220px
+  margin-left:220px;
+  height: 600px;
+  background-image: url('https://4.bp.blogspot.com/-QHfclK0_S78/WezObT28BbI/AAAAAAAAETI/zeJFiZ3MNSQckTBMJny8TeATD9KhsD-MwCK4BGAYYCw/s1600/AEPS7.png');
+}
+
+body {
+  padding-top: 50px;
+}
+.jumbotron {
+  text-align: center;
+}
+.feature-box {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #9f9a9a;
 }
