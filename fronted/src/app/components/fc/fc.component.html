@@ -195,8 +195,29 @@
           />
         </div>
 
+        <form (submit)="uploadImage()" >
+          <label for="password"><strong> Upload Image</strong></label><br>
+          <input type="file" (change)="onFileSelected($event)"   required />
+          <button type="submit">Upload</button>
+        </form>
 
+        <form (submit)="uploadImage()" >
+          <label for="password"><strong>Upload Aadhar front</strong> </label><br>
+          <input type="file" (change)="onFileSelected($event)"   required />
+          <button type="submit">Upload</button>
+        </form>
 
+        <form (submit)="uploadImage()" >
+          <label for="password"><strong>Upload Aadhar back</strong> </label><br>
+          <input type="file" (change)="onFileSelected($event)"   required />
+          <button type="submit">Upload</button>
+        </form>
+
+        <form (submit)="uploadImage()" >
+          <label for="password"><strong> Upload bank passbook</strong></label><br>
+          <input type="file" (change)="onFileSelected($event)"   required />
+          <button type="submit">Upload</button>
+        </form>
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Create FC</button>

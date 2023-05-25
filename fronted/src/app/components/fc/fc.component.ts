@@ -13,6 +13,15 @@ export class FCComponent implements OnInit{
   }
 
   URL: string = 'http://localhost:3000/api/v1/';
+  getImageData: any = {};
+  image: string = 'ab.png';
+  selectedFile: File | null = null;
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+
   constructor(private http:HttpClient ){}
 
   status:string='create';
@@ -30,6 +39,27 @@ export class FCComponent implements OnInit{
       error:err=>{alert(err)
       console.log(err)}
     })
+  }
+
+
+  uploadImage(): void {
+    const formData = new FormData();
+    formData.append('image', this.selectedFile || '');
+    console.log(formData,this.selectedFile)
+
+    this.http.post(`${this.URL}image/upload/`, formData).subscribe({
+      next: (res) => {
+        alert('image upload successfully..');
+        this.getImageData = res;
+        console.log(this.getImageData);
+
+        this.image = this.getImageData.path;
+      },
+      error: (err) => {
+        alert(err);
+        console.log(err);
+      },
+    });
   }
 
 }

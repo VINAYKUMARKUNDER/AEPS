@@ -10,7 +10,8 @@ const ServiceRoutes = require('./routers/ServiceController');
 const TicketRoutes = require('./routers/TicketController');
 const Transaction_histRoutes = require('./routers/Transaction_historyController');
 const SupportRoutes = require('./routers/SupportController');
-const UserRouters = require('./routers/UserController')
+const UserRouters = require('./routers/UserController');
+const imageUploadRoutes = require('./routers/uploadImageController');
 
 
 
@@ -29,6 +30,7 @@ app.use('/api/v1/ticket',TicketRoutes);
 app.use('/api/v1/trans',Transaction_histRoutes);
 app.use('/api/v1/support',SupportRoutes);
 app.use('/api/v1/user', UserRouters);
+app.use('/api/v1/image', imageUploadRoutes);
 
 
 app.use((err, req, res , next)=>{
