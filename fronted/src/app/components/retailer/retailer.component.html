@@ -210,12 +210,117 @@
 
 
           <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Retailer</button>
+            <button type="submit" class="btn btn-primary">Next</button>
           </div>
         </form>
       </div>
     </section>
 
+
+     <!-- upload doc -->
+  <section *ngIf="status == 'upload_doc'">
+    <div class="col-lg-6 offset-lg-3 mt-2">
+      <h4 class="text-center mb-2">Upload Documnets</h4>
+
+      <form
+        #mData="ngForm"
+        (ngSubmit)="uploadImage(mData.value)"
+        class="form-disign"
+      >
+        <div class="form-group">
+          <label for="image"><strong> Upload Image</strong></label>
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            id="image"
+            name="image"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+        <button class="form-group" type="submit">Upload</button>
+      </form>
+
+      <form
+        #frontData="ngForm"
+        (ngSubmit)="uploadImage(frontData.value)"
+        class="form-disign"
+      >
+        <label for="aadhar_front"><strong>Upload Aadhar front</strong> </label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="aadhar_front"
+          name="aadhar_front"
+          class="form-control"
+          ngModel
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+
+      <form
+        #backData="ngForm"
+        (ngSubmit)="uploadImage(backData.value)"
+        class="form-disign"
+      >
+        <label for="aadhar_back"><strong>Upload Aadhar back</strong> </label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="aadhar_back"
+          name="aadhar_back"
+          class="form-control"
+          ngModel
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+
+      <form
+        #bankData="ngForm"
+        (ngSubmit)="uploadImage(bankData.value)"
+        class="form-disign"
+      >
+        <label for="bank_passbook"
+          ><strong> Upload bank passbook</strong></label
+        >
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="bank_passbook"
+          name="bank_passbook"
+          class="form-control"
+          ngModel
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+
+      <form
+        #bankData="ngForm"
+        (ngSubmit)="uploadImage(bankData.value)"
+        class="form-disign"
+      >
+        <label for="shop_pic"
+          ><strong> Upload Shop pic</strong></label
+        >
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="shop_pic"
+          name="shop_pic"
+          class="form-control"
+          ngModel
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+
+    <button class="btn btn-success" (click)="reatilerDone()">Done</button>
+  </section>
 
   <!-- update Retailer -->
   <section *ngIf="status == 'update'">

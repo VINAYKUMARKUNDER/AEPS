@@ -63,6 +63,30 @@ const Distributor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    aadhar_front: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    aadhar_back: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    bank_passbook: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    shop_pic: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
   },
 
   {
