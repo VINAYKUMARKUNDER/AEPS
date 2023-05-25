@@ -19,4 +19,7 @@ const storage = multer.diskStorage({
     console.log(req.file)
     res.json(req.file);
   });
+
+
+  module.exports=router;
   
