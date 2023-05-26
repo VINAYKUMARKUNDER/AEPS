@@ -49,6 +49,7 @@ export class FCComponent implements OnInit {
 
         imageMap[key] =  this.image;
         this.fcRawData[key]=this.image;
+        console.log(imageMap)
         console.log(this.fcRawData)
       },
       error: (err) => {

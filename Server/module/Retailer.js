@@ -95,6 +95,29 @@ const Retailer = db.define(
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
+
+    pan: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    gst: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    aadhar_num: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    lat_img: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    pan_num: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+
+
   },
 
   {
