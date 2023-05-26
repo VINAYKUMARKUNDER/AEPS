@@ -162,6 +162,42 @@
           </div>
 
           <div class="form-group">
+            <label for="gst">GST (optional)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="gst"
+              name="gst"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="aadhar_num">Aadhar number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="aadhar_num"
+              name="aadhar_num"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="pan_num">Pan number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pan_num"
+              name="pan_num"
+              ngModel
+              required
+            />
+          </div>
+
+          <div class="form-group">
             <label for="area_name">Working area</label>
             <input
               type="text"
@@ -241,6 +277,48 @@
         </div>
         <button class="form-group" type="submit">Upload</button>
       </form>
+
+      <form
+      #mData="ngForm"
+      (ngSubmit)="uploadImage(mData.value)"
+      class="form-disign"
+    >
+      <div class="form-group">
+        <label for="lat_img"><strong> Upload Image image with shop</strong></label>
+        <p><strong>Note: </strong>make sure your GPS is on and show lan ang log in front of your img</p>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="lat_img"
+          name="lat_img"
+          class="form-control"
+          ngModel
+          required
+        />
+      </div>
+      <button class="form-group" type="submit">Upload</button>
+    </form>
+
+
+      <form
+      #mData="ngForm"
+      (ngSubmit)="uploadImage(mData.value)"
+      class="form-disign"
+    >
+      <div class="form-group">
+        <label for="pan"><strong> Upload Pan Card</strong></label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="pan"
+          name="pan"
+          class="form-control"
+          ngModel
+          required
+        />
+      </div>
+      <button class="form-group" type="submit">Upload</button>
+    </form>
 
       <form
         #frontData="ngForm"
