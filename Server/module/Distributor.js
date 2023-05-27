@@ -107,6 +107,10 @@ const Distributor = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    police_varification: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
 
 
   },

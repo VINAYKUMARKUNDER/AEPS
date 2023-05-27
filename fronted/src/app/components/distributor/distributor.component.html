@@ -395,6 +395,27 @@
         />
         <button type="submit">Upload</button>
       </form>
+
+
+      <form
+      #policeData="ngForm"
+      (ngSubmit)="uploadImage(policeData.value)"
+      class="form-disign"
+    >
+      <label for="police_varification"
+        ><strong> Upload police_varification</strong></label
+      >
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        id="police_varification"
+        name="police_varification"
+        class="form-control"
+        ngModel
+        required
+      />
+      <button type="submit">Upload</button>
+    </form>
     </div>
 
     <button class="btn btn-success" (click)="distDone()">Done</button>
