@@ -42,7 +42,7 @@ export class DistributorComponent implements OnInit{
 
     this.http.post(`${this.URL}image/upload/`, formData).subscribe({
       next: (res) => {
-        alert('image upload successfully..');
+        alert('image upload successfully...');
         this.getImageData = res;
         this.image = this.getImageData.path;
         const key:string = Object.keys(value)[0];
