@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const db = require("../database");
 
 // Define the User model
-const User = db.define('User', {
+const User = db.define('Users', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -21,6 +21,7 @@ const User = db.define('User', {
     type: DataTypes.ENUM('fc', 'distributor', 'retailer'),
     allowNull: false,
   },
+ 
 });
 
 

@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../database");
+const bcrypt = require('bcrypt');
 
 const FC = db.define(
   "Fc",
@@ -122,5 +123,7 @@ const FC = db.define(
     timestamps: false,
   }
 );
+
+
 
 module.exports = FC;
