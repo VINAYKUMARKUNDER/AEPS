@@ -5,9 +5,10 @@ const UserModule = require("../module/User");
 const ReatilerModule = require("../module/Retailer");
 const FcModule = require("../module/FC");
 const DistributorModule = require("../module/Distributor");
-const AuthController = require('./AuthController');
+const AuthController = require('./Auth/AuthController');
 const http_error = require('http-errors');
 const bcrypt = require('bcrypt');
+const json = require('jsonwebtoken')
 
 // get all entry
 router.get("/", async (req, res) => {
@@ -21,48 +22,35 @@ router.get("/", async (req, res) => {
 
 // login user
 router.post("/login", async (req, res) => {
-  try {
-    const rawData = req.body;
-    const type = rawData.type;
-    const originalData=await getDataByType(rawData.email, rawData.type);
-    if(!originalData) throw http_error.NotFound(`User is not found with email id: ${rawData.email}`);
-
-    const fetchsData = originalData[0][0];
-    const salt = bcrypt.genSaltSync(10);
-    const isMatch = await bcrypt.compare('123', fetchsData.password).then(function(res) {
-      return res;
-    });
+    const body = req.body;
+   const userData = await getDataByType(body.email, body.type);
     
-    if(!isMatch)return res.status(404).json('password is no match...');
-
-
-    const user ={
-      name:fetchsData.name,
-      email:fetchsData.email,
-      password:fetchsData.password
-    }
-
-    // rawData.createdAt=new Date();
-    console.log(req.body)
-    try {
-      const d = req.body;
-      d.createdAt='2023-05-29 11:06:55';
-      d.updatedAt='2023-05-29 11:06:55';
-      console.log(d)
-      const created = await UserModule.create(d);
-      console.log(created)
-    } catch (error) {
-      console.log(error)
-    }
-   
-
-    const token = AuthController.generateToken(user);
+      if (!userData) {
+        return res.json({
+          data: "Invalid email or password"
+        });
+      }
+      
+      const result = bcrypt.compareSync( body.password,userData.password);
+     
+      if (result) {
+        userData.password = undefined;
+        const jsontoken = json.sign({ result: userData }, 'vinay', {
+          expiresIn: "1h"
+        });
+        return res.json({
+          success: 1,
+          message: "login successfully",
+          token: jsontoken
+        });
+      } else {
+        return res.json({
+          success: 0,
+          data: "Invalid email or password"
+        });
+      }
     
-    return res.status(200).json({token});
-   
-  } catch (error) {
-    return res.status(500).json(`User is not found...`);
-  }
+  
 });
 
 
@@ -73,7 +61,7 @@ const getDataByType = async (email, type)=>{
         (err, result) => {}
       );
       
-      return data;
+      return data[0][0];
      
     }
     else if (type.toLowerCase("distributor")) {
@@ -81,7 +69,7 @@ const getDataByType = async (email, type)=>{
           `Select * from distributor where email = '${email}'`,
           (err, result) => {}
         );
-        return data;
+        return data[0][0];
       }
 
       else if (type.toLowerCase("retailer")) {
@@ -89,7 +77,7 @@ const getDataByType = async (email, type)=>{
           `Select * from retailer where email = '${email}'`,
           (err, result) => {}
         );
-        return data;
+        return data[0][0];
     }
     else return ('put valid type')
     

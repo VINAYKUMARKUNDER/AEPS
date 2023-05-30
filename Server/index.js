@@ -12,6 +12,7 @@ const Transaction_histRoutes = require('./routers/Transaction_historyController'
 const SupportRoutes = require('./routers/SupportController');
 const UserRouters = require('./routers/UserController');
 const imageUploadRoutes = require('./routers/uploadImageController');
+const {verifyToken} = require('./routers/Auth/AuthController')
 
 
 
@@ -21,16 +22,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/v1/fc',fcRouters);
-app.use('/api/v1/dist',DistributorRoutes);
-app.use('/api/v1/retailer',RetailerRoutes);
-app.use('/api/v1/service',ServiceRoutes);
-app.use('/api/v1/fc',fcRouters);
-app.use('/api/v1/ticket',TicketRoutes);
-app.use('/api/v1/trans',Transaction_histRoutes);
-app.use('/api/v1/support',SupportRoutes);
-app.use('/api/v1/user', UserRouters);
-app.use('/api/v1/image', imageUploadRoutes);
+app.use('/api/v1/fc', verifyToken ,fcRouters);
+app.use('/api/v1/dist', verifyToken ,DistributorRoutes);
+app.use('/api/v1/retailer', verifyToken ,RetailerRoutes);
+app.use('/api/v1/service', verifyToken ,ServiceRoutes);
+app.use('/api/v1/ticket', verifyToken ,TicketRoutes);
+app.use('/api/v1/trans', verifyToken ,Transaction_histRoutes);
+app.use('/api/v1/support', verifyToken ,SupportRoutes);
+app.use('/api/v1/user', verifyToken , UserRouters);
+app.use('/api/v1/image', verifyToken , imageUploadRoutes);
 
 
 app.use((err, req, res , next)=>{
