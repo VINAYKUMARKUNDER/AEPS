@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const db = require("../database");
+const db = require("../../database");
 
 const Distributor = db.define(
   "Distributor",
@@ -121,7 +121,7 @@ const Distributor = db.define(
   }
 );
 
-const FC = require('./FcModule/FC')
+const FC = require('../FcModule/FC')
 
 Distributor.belongsTo(FC, {
     foreignKey: { allowNull: false, name: 'fc_id'},
