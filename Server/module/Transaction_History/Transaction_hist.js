@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const db = require("../database");
+const db = require("../../database");
 
 const Transaction_history = db.define(
   "Transaction_history",
