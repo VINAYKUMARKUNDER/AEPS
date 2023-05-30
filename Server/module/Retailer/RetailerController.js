@@ -1,22 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../../database");
-const bcrypt = require("bcrypt");
-const RetailerModule = require("../module/Retailer");
+const {
+  createNewRetailer,
+  deleteRetailerById,
+  getAllRetailer,
+  getOneRetailerByEmail,
+  getOneRetailerById,
+  updateRetailerById,
+} = require("./RetailerService");
 
 // get all entry
-router.get("/", );
+router.get("/", getAllRetailer);
 
 // get entry by id
-router.get("/:id",);
+router.get("/:id", getOneRetailerById);
+
+// get entry by email
+router.get("/email/", getOneRetailerByEmail);
 
 // create new entry
-router.post("/", );
+router.post("/", createNewRetailer);
 
 // updated entry by id
-router.put("/:id", );
+router.put("/:id", updateRetailerById);
 
 // deleted entry by id
-router.delete("/:id", );
+router.delete("/:id", deleteRetailerById);
 
 module.exports = router;

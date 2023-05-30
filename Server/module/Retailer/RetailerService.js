@@ -1,5 +1,4 @@
-const express = require("express");
-const router = express.Router();
+
 const db = require("../../database");
 const bcrypt = require("bcrypt");
 const RetailerModule = require("../module/Retailer");
@@ -28,7 +27,7 @@ module.exports = {
       res.status(500).json(error);
     }
   },
-  
+
    // get a entry by email
   getOneRetailerByEmail:  async (req, res) => {
     try {
