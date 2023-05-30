@@ -1,8 +1,6 @@
-
 const bcrypt = require("bcrypt");
 const db = require("../../database");
 const FcModule = require("./FC");
-
 
 module.exports = {
   // get all entry
@@ -30,12 +28,17 @@ module.exports = {
   // get one entry by email
   getOneFcByEmail: async (req, res) => {
     try {
-      const data = await db.query(`Select * from Fc where email = '${req.body.email}' LIMIT 1`, (err, result)=>{})
-      if (data[0].length==0)
-        res.status(404).json(`Data not found with fc email id : ${req.body.email}`);
+      const data = await db.query(
+        `Select * from Fc where email = '${req.body.email}' LIMIT 1`,
+        (err, result) => {}
+      );
+      if (data[0].length == 0)
+        res
+          .status(404)
+          .json(`Data not found with fc email id : ${req.body.email}`);
       else res.status(200).json(data[0][0]);
     } catch (error) {
-      res.status(500).json({error});
+      res.status(500).json({ error });
     }
   },
 
