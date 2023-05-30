@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const db = require("../database");
+const db = require("../../database");
 
 
 
@@ -27,9 +27,9 @@ const Activity = db.define(
   }
 );
 
-const Distributor = require("./Distributor");
-const Retailer = require("./Retailer");
-const Transaction_hist = require("./Transaction_hist");
+const Distributor = require("../Distributor");
+const Retailer = require("../Retailer");
+const Transaction_hist = require("../Transaction_hist");
 
 Activity.belongsTo(Distributor, {
     foreignKey: { allowNull: false },
@@ -43,5 +43,9 @@ Activity.belongsTo(Transaction_hist, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });
+
+
+
+  
 
 module.exports = Activity;
