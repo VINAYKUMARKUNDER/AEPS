@@ -1,5 +1,5 @@
 const { DataTypes, BOOLEAN } = require("sequelize");
-const db = require("../database");
+const db = require("../../database");
 
 const Ticket = db.define(
   "Ticket",
@@ -31,7 +31,7 @@ const Ticket = db.define(
 
 const Distributor = require("./Distributor");
 const Retailer = require("./Retailer");
-const Transaction_hist = require("./Transaction_hist");
+const Transaction_hist = require("../Transaction_hist");
 
 Ticket.belongsTo(Distributor, {
     foreignKey: { allowNull: false },
