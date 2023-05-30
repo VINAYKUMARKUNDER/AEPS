@@ -44,8 +44,17 @@ router.post("/login", async (req, res) => {
 
     // rawData.createdAt=new Date();
     console.log(req.body)
-    const created = await UserModule.create(req.body);
-    // console.log(created)
+    try {
+      const d = req.body;
+      d.createdAt='2023-05-29 11:06:55';
+      d.updatedAt='2023-05-29 11:06:55';
+      console.log(d)
+      const created = await UserModule.create(d);
+      console.log(created)
+    } catch (error) {
+      console.log(error)
+    }
+   
 
     const token = AuthController.generateToken(user);
     

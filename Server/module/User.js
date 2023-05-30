@@ -1,4 +1,4 @@
-// Import Sequelize and define the database connection
+
 const { Sequelize, DataTypes } = require('sequelize');
 const db = require("../database");
 
