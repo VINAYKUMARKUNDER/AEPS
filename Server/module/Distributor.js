@@ -121,7 +121,7 @@ const Distributor = db.define(
   }
 );
 
-const FC = require('./FC')
+const FC = require('./FcModule/FC')
 
 Distributor.belongsTo(FC, {
     foreignKey: { allowNull: false, name: 'fc_id'},

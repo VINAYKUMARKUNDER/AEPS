@@ -21,7 +21,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       village VARCHAR(40),
 //       area_name VARCHAR(40),
 //       bio VARCHAR(255),
-//       email VARCHAR(40),
+//       email VARCHAR(40) unique,
 //       mobile VARCHAR(13),
 //       name VARCHAR(40),
 //       password VARCHAR(255),
@@ -33,7 +33,8 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       aadhar_num varchar(16),
 //       lat_img varchar(100),
 //       pan_num varchar(10),
-//       image varchar(100)
+//       image varchar(100),
+//       status boolean
 //   );
   
 //   CREATE TABLE  IF NOT EXISTS distributor (
@@ -49,7 +50,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       village VARCHAR(40),
 //       area_name VARCHAR(40),
 //       bio VARCHAR(255),
-//       email VARCHAR(40),
+//       email VARCHAR(40) unique,
 //       mobile VARCHAR(13),
 //       name VARCHAR(40),
 //       password VARCHAR(255),
@@ -81,7 +82,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       village VARCHAR(40),
 //       area_name VARCHAR(40),
 //       bio VARCHAR(255),
-//       email VARCHAR(40),
+//       email VARCHAR(40) unique,
 //       mobile VARCHAR(13),
 //       name VARCHAR(40),
 //       password VARCHAR(255),
