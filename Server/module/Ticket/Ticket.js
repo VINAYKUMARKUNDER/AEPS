@@ -4,7 +4,7 @@ const db = require("../../database");
 const Ticket = db.define(
   "Ticket",
   {
-    ticket_id: {
+    ticketId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,

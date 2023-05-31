@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const FC = db.define(
   "Fc",
   {
-    fc_id: {
+    fcId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -23,7 +23,7 @@ const FC = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    house_no: {
+    houseNo: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -39,7 +39,7 @@ const FC = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sub_district: {
+    subDistrict: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -51,7 +51,7 @@ const FC = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    area_name: {
+    areaName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -76,15 +76,15 @@ const FC = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_front: {
+    aadharFront: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_back: {
+    aadharBack: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    bank_passbook: {
+    bankPassbook: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -100,15 +100,15 @@ const FC = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_num: {
+    aadharNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    lat_img: {
+    mapingImage: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    pan_num: {
+    panNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

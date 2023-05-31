@@ -4,7 +4,7 @@ const db = require("../../database");
 const Support = db.define(
   "Support",
   {
-    support_id: {
+    supportId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: false,
@@ -14,7 +14,7 @@ const Support = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    support_type: {
+    supportType: {
       type: DataTypes.STRING,
       allowNull: false,
     },

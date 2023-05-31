@@ -3,7 +3,7 @@ const db = require("../../database");
 
 const Service= db.define("Service", 
     {
-        service_id:{
+        serviceId:{
             type:DataTypes.INTEGER,
             primaryKey:true,
             autoIncrement:true,
@@ -13,7 +13,7 @@ const Service= db.define("Service",
             type: DataTypes.STRING,
             allowNull: false
         },
-        is_active: {
+        isActive: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
@@ -21,11 +21,11 @@ const Service= db.define("Service",
             type: DataTypes.FLOAT,
             allowNull:false
         },
-        service_name: {
+        serviceName: {
             type: DataTypes.STRING,
             allowNull:false
         },
-        start_date: {
+        startDate: {
             type: DataTypes.DATE,
             allowNull:false
         }

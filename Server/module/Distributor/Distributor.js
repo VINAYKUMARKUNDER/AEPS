@@ -4,7 +4,7 @@ const db = require("../../database");
 const Distributor = db.define(
   "Distributor",
   {
-    dist_id: {
+    distributorId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -22,7 +22,7 @@ const Distributor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    house_no: {
+    houseNo: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -38,7 +38,7 @@ const Distributor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sub_district: {
+    subDistrict: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -67,19 +67,19 @@ const Distributor = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_front: {
+    aadharFront: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_back: {
+    aadharBack: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    bank_passbook: {
+    bankPassbook: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    shop_pic: {
+    shopPic: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -95,19 +95,19 @@ const Distributor = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_num: {
+    aadharNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    lat_img: {
+    mapingImage: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    pan_num: {
+    panNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    police_varification: {
+    policeVarification: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -124,7 +124,7 @@ const Distributor = db.define(
 const FC = require('../FcModule/FC')
 
 Distributor.belongsTo(FC, {
-    foreignKey: { allowNull: false, name: 'fc_id'},
+    foreignKey: { allowNull: false, name: 'fcId'},
     onDelete: "CASCADE",
   });
 

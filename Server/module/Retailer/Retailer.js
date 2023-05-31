@@ -22,7 +22,7 @@ const Retailer = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    house_no: {
+    houseNo: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -38,7 +38,7 @@ const Retailer = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sub_district: {
+    subDistrict: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -50,7 +50,7 @@ const Retailer = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    area_name: {
+    areaName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -75,19 +75,19 @@ const Retailer = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_front: {
+    aadharFront: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_back: {
+    aadharBack: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    bank_passbook: {
+    bankPassbook: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    shop_pic: {
+    shopPic: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -104,15 +104,15 @@ const Retailer = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    aadhar_num: {
+    aadharNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    lat_img: {
+    mapingImage: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    pan_num: {
+    panNumber: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -129,7 +129,7 @@ const Retailer = db.define(
 const Distributor = require('../Distributor/Distributor')
 
 Retailer.belongsTo(Distributor, {
-    foreignKey: { allowNull: false, name: "distibuter_id" },
+    foreignKey: { allowNull: false, name: "distributorId" },
     onDelete: "CASCADE",
   });
 

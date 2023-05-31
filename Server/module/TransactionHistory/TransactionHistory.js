@@ -4,7 +4,7 @@ const db = require("../../database");
 const Transaction_history = db.define(
   "Transaction_history",
   {
-    transaction_id: {
+    transactionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement:true,
@@ -19,7 +19,7 @@ const Transaction_history = db.define(
       allowNull:false
     },
     
-    transaction_type: {
+    transactionType: {
       type: DataTypes.STRING,
       allowNull: false
     }
@@ -32,7 +32,7 @@ const Transaction_history = db.define(
 
 const Retailer = require('../Retailer/Retailer')
 Transaction_history.belongsTo(Retailer, {
-  foreignKey: { allowNull: false, name:'retailer_id' },
+  foreignKey: { allowNull: false, name:'retailerId' },
   onDelete: "CASCADE",
 });
 
