@@ -1,9 +1,9 @@
 
 const routes = require('./routers/Config/config')
+require('dotenv').config();
 
-
-routes.listen(3000, () => {
-  console.log("port is running...");
+routes.listen(process.env.PORT, () => {
+  console.log(`port is running on port ${process.env.PORT}`);
 });
 
 
