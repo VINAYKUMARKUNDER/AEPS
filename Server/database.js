@@ -1,10 +1,15 @@
-
 const { Sequelize } = require("sequelize");
-const conn = new Sequelize("aeps", "root", "Vinay@1313", {
-  host: "localhost",
-  dialect: "mysql",
-});
+require("dotenv").config();
 
+const conn = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: "mysql",
+  }
+);
 
 // const createTable = conn.query(
 //   `
@@ -36,7 +41,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       image varchar(100),
 //       status boolean
 //   );
-  
+
 //   CREATE TABLE  IF NOT EXISTS distributor (
 //       dist_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //      country VARCHAR(30),
@@ -68,7 +73,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       fc_id INTEGER,
 //       FOREIGN KEY (fc_id) REFERENCES fc(fc_id)
 //   );
-  
+
 //   CREATE TABLE  IF NOT EXISTS retailer (
 //       id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       country VARCHAR(30),
@@ -100,9 +105,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       distibuter_id INTEGER,
 //       FOREIGN KEY (distibuter_id) REFERENCES distributor(dist_id)
 //   );
-  
-  
-  
+
 //   CREATE TABLE IF NOT EXISTS services (
 //       service_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       about VARCHAR(255),
@@ -111,7 +114,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       service_name VARCHAR(55),
 //       start_date DATETIME(6)
 //   );
-  
+
 //   CREATE TABLE IF NOT EXISTS retailer_services (
 //       retailer_id INTEGER NOT NULL auto_Increment,
 //       service_id INTEGER NOT NULL,
@@ -119,7 +122,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       FOREIGN KEY (retailer_id) REFERENCES retailer(id),
 //       FOREIGN KEY (service_id) REFERENCES services(service_id)
 //   );
-  
+
 //   CREATE TABLE IF NOT EXISTS supports (
 //       support_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       query TEXT,
@@ -127,9 +130,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       retailer_id INTEGER,
 //       FOREIGN KEY (retailer_id) REFERENCES retailer(id)
 //   );
-  
-  
-  
+
 //   CREATE TABLE IF NOT EXISTS transaction_history (
 //       transaction_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       description VARCHAR(255),
@@ -139,7 +140,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       retailer_id INTEGER,
 //       FOREIGN KEY (retailer_id) REFERENCES retailer(id)
 //   );
-  
+
 //   CREATE TABLE IF NOT EXISTS activity (
 //       activity_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       date DATETIME(6),
@@ -151,7 +152,7 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       FOREIGN KEY (retailer_id) REFERENCES retailer(id),
 //       FOREIGN KEY (transaction_id) REFERENCES transaction_history(transaction_id)
 //   );
-  
+
 //   CREATE TABLE IF NOT EXISTS ticket (
 //       ticket_id INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       date DATETIME(6),
@@ -165,7 +166,5 @@ const conn = new Sequelize("aeps", "root", "Vinay@1313", {
 //       FOREIGN KEY (transaction_id) REFERENCES transaction_history(transaction_id)
 //   );`
 // );
-
-
 
 module.exports = conn;
