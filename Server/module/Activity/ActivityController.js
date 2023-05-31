@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../../database");
-const ActivityModule = require("../module/Activity");
+const verifyToken = require('../../Jwt/Auth/AuthController')
 
 // get all entry
 router.get("/", );

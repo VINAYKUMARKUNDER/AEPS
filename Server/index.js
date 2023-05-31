@@ -18,14 +18,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/v1/fc", fcRouters);
-app.use("/api/v1/dist", verifyToken, DistributorRoutes);
-app.use("/api/v1/retailer", verifyToken, RetailerRoutes);
-app.use("/api/v1/service", verifyToken, ServiceRoutes);
-app.use("/api/v1/ticket", verifyToken, TicketRoutes);
-app.use("/api/v1/trans", verifyToken, TransactionHistoryRoutes);
-app.use("/api/v1/support", verifyToken, SupportRoutes);
+app.use("/api/v1/dist", DistributorRoutes);
+app.use("/api/v1/retailer", RetailerRoutes);
+app.use("/api/v1/service",  ServiceRoutes);
+app.use("/api/v1/ticket",  TicketRoutes);
+app.use("/api/v1/trans",  TransactionHistoryRoutes);
+app.use("/api/v1/support",  SupportRoutes);
 app.use("/api/v1/user", UserRouters);
-app.use("/api/v1/image", verifyToken, imageUploadRoutes);
+app.use("/api/v1/image",  imageUploadRoutes);
 
 app.use((err, req, res, next) => {
   res.status(500).json({
@@ -39,3 +39,6 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log("port is running...");
 });
+
+
+

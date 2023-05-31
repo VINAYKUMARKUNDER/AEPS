@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {verifyToken} = require('../../Jwt/Auth/AuthController')
 
 const {
   createNewFc,
@@ -14,21 +14,21 @@ const {
 
 
 // get all fc data
-router.get("/",getAllFc);
+router.get("/",verifyToken, getAllFc);
 
 // find by email
-router.get("/email/",getOneFcByEmail);
+router.get("/email/",verifyToken, getOneFcByEmail);
 
 // find by id
-router.get("/:id",getOneFcById);
+router.get("/:id",verifyToken,getOneFcById);
 
 // create new entry
 router.post("/", createNewFc);
 
 // update entry
-router.put("/:id", updateFcById);
+router.put("/:id",verifyToken, updateFcById);
 
 // deleted enrty by id
-router.delete("/:id",deleteFcById);
+router.delete("/:id",verifyToken,deleteFcById);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const secretKey = "aaaaaaaaaaaaa";
+require("dotenv").config();
+const { modulePermissions } = require("./config");
 
 module.exports = {
   generateToken: (user) => {
@@ -12,16 +13,22 @@ module.exports = {
     if (token) {
       // Remove Bearer from string
       token = token.slice(7);
-      jwt.verify(token, 'vinay', (err, decoded) => {
-        if (err) {
-          return res.json({
-            message: "Invalid Token...",
-          });
-        } else {
-          req.decoded = decoded;
-          next();
+      const decode = jwt.verify(
+        token,
+        process.env.JWT_SECRET,
+        (err, decoded) => {
+          if (err) {
+            return res.json({
+              message: "Invalid Token...",
+              decode: decode,
+            });
+          } else {
+            req.decoded = decoded;
+
+            next();
+          }
         }
-      });
+      );
     } else {
       return res.json({
         message: "Access Denied! Unauthorized User",

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../../database");
 const UserModule = require("./User");
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const json = require('jsonwebtoken')
 
@@ -30,13 +31,14 @@ router.post("/login", async (req, res) => {
      
       if (result) {
         userData.password = undefined;
-        const jsontoken = json.sign({ result: userData }, 'vinay', {
+        const jsontoken = json.sign({ result: userData }, process.env.JWT_SECRET, {
           expiresIn: "1h"
         });
         return res.json({
           success: 1,
           message: "login successfully",
-          token: jsontoken
+          token: jsontoken,
+
         });
       } else {
         return res.json({
