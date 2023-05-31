@@ -1,5 +1,5 @@
 
-const SupportModule = require("../module/Support");
+const SupportModule = require("./Support");
 
 module.exports = {
   // get all entry

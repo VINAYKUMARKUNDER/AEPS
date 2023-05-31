@@ -1,7 +1,5 @@
-const express = require("express");
-const router = express.Router();
-const db = require("../../database");
-const TicketModule = require("../module/Ticket");
+
+const TicketModule = require("./Ticket");
 
 module.exports = {
   // get all entry

@@ -1,6 +1,6 @@
 const db = require("../../database");
 const bcrypt = require("bcrypt");
-const distributorModule = require("../module/Distributor");
+const distributorModule = require("./Distributor");
 
 module.exports = {
   // get all entry

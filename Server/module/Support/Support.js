@@ -25,7 +25,7 @@ const Support = db.define(
   }
 );
 
-const Retailer = require("./Retailer");
+const Retailer = require("../Retailer/Retailer");
 Support.belongsTo(Retailer, {
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",

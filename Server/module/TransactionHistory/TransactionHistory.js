@@ -30,7 +30,7 @@ const Transaction_history = db.define(
   }
 );
 
-const Retailer = require('./Retailer')
+const Retailer = require('../Retailer/Retailer')
 Transaction_history.belongsTo(Retailer, {
   foreignKey: { allowNull: false, name:'retailer_id' },
   onDelete: "CASCADE",

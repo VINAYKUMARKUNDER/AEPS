@@ -29,9 +29,9 @@ const Ticket = db.define(
   }
 );
 
-const Distributor = require("./Distributor");
-const Retailer = require("./Retailer");
-const Transaction_hist = require("../Transaction_hist");
+const Distributor = require("../Distributor/Distributor");
+const Retailer = require("../Retailer/Retailer");
+const TransactionHistory = require("../TransactionHistory/TransactionHistory");
 
 Ticket.belongsTo(Distributor, {
     foreignKey: { allowNull: false },
@@ -41,7 +41,7 @@ Ticket.belongsTo(Retailer, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });
-Ticket.belongsTo(Transaction_hist, {
+Ticket.belongsTo(TransactionHistory, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });

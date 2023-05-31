@@ -1,6 +1,6 @@
 
 const db = require("../../database");
-const Transaction_historyModule = require("../module/Transaction_hist");
+const Transaction_historyModule = require("./TransactionHistory");
 
 
 const convertDateFormat = (rawDate) => {

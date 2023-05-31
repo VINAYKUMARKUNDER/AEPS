@@ -1,7 +1,7 @@
 
 const db = require("../../database");
 const bcrypt = require("bcrypt");
-const RetailerModule = require("../module/Retailer");
+const RetailerModule = require("./Retailer");
 
 module.exports = {
 

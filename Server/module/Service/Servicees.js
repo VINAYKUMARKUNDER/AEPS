@@ -1,5 +1,5 @@
 
-const ServiceModule = require("../module/Service");
+const ServiceModule = require("./Service");
 
 module.exports = {
   // get all service

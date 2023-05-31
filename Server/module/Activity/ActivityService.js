@@ -1,5 +1,5 @@
 
-const ActivityModule = require("../module/Activity");
+const ActivityModule = require("./Activity");
 
 module.exports = {
 

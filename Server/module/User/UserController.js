@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../database");
-const UserModule = require("../module/User");
-const ReatilerModule = require("../module/Retailer");
-const FcModule = require("../module/FcModule/FC");
-const DistributorModule = require("../module/Distributor");
-const AuthController = require('./Auth/AuthController');
-const http_error = require('http-errors');
+const db = require("../../database");
+const UserModule = require("./User");
 const bcrypt = require('bcrypt');
 const json = require('jsonwebtoken')
 

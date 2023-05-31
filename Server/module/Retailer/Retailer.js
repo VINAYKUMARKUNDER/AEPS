@@ -126,7 +126,7 @@ const Retailer = db.define(
   }
 );
 
-const Distributor = require('./Distributor')
+const Distributor = require('../Distributor/Distributor')
 
 Retailer.belongsTo(Distributor, {
     foreignKey: { allowNull: false, name: "distibuter_id" },
