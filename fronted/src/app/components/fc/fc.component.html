@@ -105,12 +105,12 @@
         </div>
 
         <div class="form-group">
-          <label for="sub_district">Sub District</label>
+          <label for="subDistrict">Sub District</label>
           <input
             type="text"
             class="form-control"
-            id="sub_district"
-            name="sub_district"
+            id="subDistrict"
+            name="subDistrict"
             ngModel
             required
           />
@@ -177,36 +177,36 @@
         </div>
 
         <div class="form-group">
-          <label for="aadhar_num">Aadhar number</label>
+          <label for="aadharNumber">Aadhar number</label>
           <input
             type="text"
             class="form-control"
-            id="aadhar_num"
-            name="aadhar_num"
+            id="aadharNumber"
+            name="aadharNumber"
             ngModel
             required
           />
         </div>
 
         <div class="form-group">
-          <label for="pan_num">Pan number</label>
+          <label for="panNumber">Pan number</label>
           <input
             type="text"
             class="form-control"
-            id="pan_num"
-            name="pan_num"
+            id="panNumber"
+            name="panNumber"
             ngModel
             required
           />
         </div>
 
         <div class="form-group">
-          <label for="area_name">Working area</label>
+          <label for="areaName">Working area</label>
           <input
             type="text"
             class="form-control"
-            id="area_name"
-            name="area_name"
+            id="areaName"
+            name="areaName"
             ngModel
             required
           />
@@ -278,13 +278,13 @@
       class="form-disign"
     >
       <div class="form-group">
-        <label for="lat_img"><strong> Upload Image image with shop</strong></label>
+        <label for="mapingImage"><strong> Upload Image image with shop</strong></label>
         <p><strong>Note: </strong>make sure your GPS is on and show lan ang log in front of your img</p>
         <input
           type="file"
           (change)="onFileSelected($event)"
-          id="lat_img"
-          name="lat_img"
+          id="mapingImage"
+          name="mapingImage"
           class="form-control"
           ngModel
           required
@@ -319,12 +319,12 @@
         (ngSubmit)="uploadImage(frontData.value)"
         class="form-disign"
       >
-        <label for="aadhar_front"><strong>Upload Aadhar front</strong> </label>
+        <label for="aadharFront"><strong>Upload Aadhar front</strong> </label>
         <input
           type="file"
           (change)="onFileSelected($event)"
-          id="aadhar_front"
-          name="aadhar_front"
+          id="aadharFront"
+          name="aadharFront"
           class="form-control"
           ngModel
           required
@@ -337,12 +337,12 @@
         (ngSubmit)="uploadImage(backData.value)"
         class="form-disign"
       >
-        <label for="aadhar_back"><strong>Upload Aadhar back</strong> </label>
+        <label for="aadharBack"><strong>Upload Aadhar back</strong> </label>
         <input
           type="file"
           (change)="onFileSelected($event)"
-          id="aadhar_back"
-          name="aadhar_back"
+          id="aadharBack"
+          name="aadharBack"
           class="form-control"
           ngModel
           required
@@ -355,14 +355,14 @@
         (ngSubmit)="uploadImage(bankData.value)"
         class="form-disign"
       >
-        <label for="bank_passbook"
+        <label for="bankPassbook"
           ><strong> Upload bank passbook</strong></label
         >
         <input
           type="file"
           (change)="onFileSelected($event)"
-          id="bank_passbook"
-          name="bank_passbook"
+          id="bankPassbook"
+          name="bankPassbook"
           class="form-control"
           ngModel
           required
