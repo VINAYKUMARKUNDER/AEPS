@@ -2,6 +2,7 @@
 const db = require("../../database");
 const bcrypt = require("bcrypt");
 const RetailerModule = require("./Retailer");
+const {createNewActivity} = require('../Activity/ActivityService')
 
 module.exports = {
 

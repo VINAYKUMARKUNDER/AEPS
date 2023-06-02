@@ -39,6 +39,8 @@ const conn = new Sequelize(
 //       mapingImage varchar(100),
 //       panNumber varchar(10),
 //       image varchar(100),
+//       createAt timestamp,
+//       updateAt timestamp,
 //       status boolean
 //   );
 
@@ -70,6 +72,8 @@ const conn = new Sequelize(
 //       image varchar(100),
 //       policeVarification varchar(100),
 //       shopPic varchar(100),
+//       createAt timestamp,
+//       updateAt timestamp,
 //       fcId INTEGER,
 //       FOREIGN KEY (fcId) REFERENCES fc(fcId)
 //   );
@@ -102,6 +106,8 @@ const conn = new Sequelize(
 //       image varchar(100),
 //       shopPic varchar(100),
 //       typeOfBusiness VARCHAR(255),
+//       createAt timestamp,
+//       updateAt timestamp,
 //       distributorId INTEGER,
 //       FOREIGN KEY (distributorId) REFERENCES distributor(distributorId)
 //   );

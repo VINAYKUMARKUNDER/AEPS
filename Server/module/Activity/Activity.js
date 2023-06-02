@@ -16,10 +16,22 @@ const Activity = db.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    totalAmount: {
-      type: DataTypes.INTEGER,
+    description: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
+    FcId:{
+      type: DataTypes.INTEGER,
+      allowNull:true
+    },
+    distributorId:{
+      type: DataTypes.INTEGER,
+      allowNull:true
+    },
+    retailerId:{
+      type: DataTypes.INTEGER,
+      allowNull:true
+    }
   },
   {
     tableName: "activity",
