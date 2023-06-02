@@ -116,6 +116,18 @@ const Retailer = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    typeOfBusiness:{
+      type: DataTypes.STRING,
+      allowNull:false
+    },
+    createAt:{
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    updateAt:{
+      type: DataTypes.DATE,
+      allowNull:true
+    }
 
 
   },

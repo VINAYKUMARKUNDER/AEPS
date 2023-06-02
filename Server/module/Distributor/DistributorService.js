@@ -49,6 +49,8 @@ module.exports = {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(rawData.password, salt);
       rawData.password = hash;
+      rawData.createAt=new Date();
+      rawData.updateAt=new Date();
       const data = await distributorModule.create(rawData);
       res.status(201).json("created new entry successfully...");
     } catch (error) {

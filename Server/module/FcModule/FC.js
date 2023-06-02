@@ -91,6 +91,7 @@ const FC = db.define(
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
+      defaultValue: false
     },
     pan: {
       type: DataTypes.TEXT,
@@ -112,6 +113,16 @@ const FC = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    createAt:{
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    updateAt:{
+      type: DataTypes.DATE,
+      allowNull:true
+    }
+
+
 
 
    

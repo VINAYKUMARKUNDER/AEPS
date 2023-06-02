@@ -111,6 +111,16 @@ const Distributor = db.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    createAt:{
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    updateAt:{
+      type: DataTypes.DATE,
+      allowNull:true
+    }
+
+
 
 
   },

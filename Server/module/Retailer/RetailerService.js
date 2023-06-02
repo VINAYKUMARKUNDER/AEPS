@@ -50,8 +50,11 @@ module.exports = {
     try {
       const rawData = req.body;
       const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(rawData.password, salt);
-      rawData.password = hash;
+      rawData.password = bcrypt.hashSync(rawData.password, salt);
+      rawData.createAt=new Date();
+      rawData.updateAt=new Date();
+      console.log(rawData);
+
       const data = await RetailerModule.create(rawData);
       res.status(201).json("new entry created successfully...");
     } catch (error) {
