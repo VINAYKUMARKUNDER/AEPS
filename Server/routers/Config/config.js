@@ -14,7 +14,7 @@ const TicketRoutes = require("../../module/Ticket/TicketController");
 const TransactionHistoryRoutes = require("../../module/TransactionHistory/TransactionHistoryController");
 const SupportRoutes = require("../../module/Support/SupportController");
 const UserRouters = require("../../module/User/UserController");
-const imageUploadRoutes = require("../../module/UploadImage/uploadImageController");
+const imageUploadRoutes = require("../../module/UploadImage/Image");
 
 
 app.use("/api/v1/fc", fcRouters);
