@@ -49,14 +49,17 @@ module.exports = {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(rawData.password, salt);
       rawData.password = hash;
-      rawData.createAt=new Date();
-      rawData.updateAt=new Date();
+      rawData.createAt = new Date();
+      rawData.updateAt = new Date();
       const data = await distributorModule.create(rawData);
 
       const distributorId = data.dataValues.distributorId;
       const fcId = data.dataValues.fcId;
-      console.log(distributorId, fcId)
-      await db.query(`INSERT INTO activity (description,distributorId,fcId) VALUES ("new distributor creted..",${distributorId},${fcId})` , async (err, result)=>{})
+      console.log(distributorId, fcId);
+      await db.query(
+        `INSERT INTO activity (description,distributorId,fcId) VALUES ("new distributor creted..",${distributorId},${fcId})`,
+        async (err, result) => {}
+      );
       res.status(201).json("created new entry successfully...");
     } catch (error) {
       res.status(500).json(error);
@@ -70,18 +73,20 @@ module.exports = {
       if (!find)
         res.status(200).json(`Data not found with fc id :${req.params.id}`);
       else {
-       const rawData = req.body;
-       rawData.updateAt=new Date();
+        const rawData = req.body;
+        rawData.updateAt = new Date();
         const data = await distributorModule.update(rawData, {
           where: {
             distributorId: req.params.id,
           },
         });
         if (data[0] == 1) {
-          await db.query(`INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor updated..",${req.params.id},${find.fcId})` , async (err, result)=>{})
+          await db.query(
+            `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor updated..",${req.params.id},${find.fcId})`,
+            async (err, result) => {}
+          );
           res.status(200).json("updated successgully...");
-        }
-        else res.status(200).json("already updated...");
+        } else res.status(200).json("already updated...");
       }
     } catch (error) {
       res.status(500).json(error);
@@ -101,34 +106,59 @@ module.exports = {
         },
       });
 
-
-      await db.query(`INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor deleted..",${req.params.id},${find.fcId})` , async (err, result)=>{})
-       res.status(200).json("deleted successfully...");
+      await db.query(
+        `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor deleted..",${req.params.id},${find.fcId})`,
+        async (err, result) => {}
+      );
+      res.status(200).json("deleted successfully...");
     } catch (error) {
       res.status(500).json(error);
     }
   },
 
   changeStatusById: async (req, res) => {
-      try {
-        const find = await distributorModule.findByPk(req.params.id);
-        if (!find)
-          return res.status(404).json(`Data not found with fc id :${req.params.id}`);
-
-          else  {
-           const getStatus = find.status;
-           if(getStatus){
-            await db.query(`update distributor set status=false where distributorId=${req.params.id}` , (err, result)=>{});
-           }else {
-            await db.query(`update distributor set status=true where distributorId=${req.params.id}` , (err, result)=>{});
-           }
-            await db.query(`INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor status updated..",${req.params.id},${find.fcId})` , async (err, result)=>{})
-            res.status(200).json("updated successgully...");
-          }
-         
-      } catch (error) {
-        
+    try {
+      const find = await distributorModule.findByPk(req.params.id);
+      if (!find)
+        return res
+          .status(404)
+          .json(`Data not found with fc id :${req.params.id}`);
+      else {
+        const getStatus = find.status;
+        if (getStatus) {
+          await db.query(
+            `update distributor set status=false where distributorId=${req.params.id}`,
+            (err, result) => {}
+          );
+        } else {
+          await db.query(
+            `update distributor set status=true where distributorId=${req.params.id}`,
+            (err, result) => {}
+          );
+        }
+        await db.query(
+          `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor status updated..",${req.params.id},${find.fcId})`,
+          async (err, result) => {}
+        );
+        res.status(200).json("updated successgully...");
       }
-  }
+    } catch (error) {}
+  },
 
+  getAllRetailerByDistributorId: async (req, res) => {
+    try {
+      const find = await distributorModule.findByPk(req.params.id);
+      if (!find)
+        res.status(200).json(`Data not found with Distributor id :${req.params.id}`);
+      else {
+        const data = await db.query(
+          `Select * from Retailer WHERE distributorId= ${req.params.id}`,
+          (err, result) => {}
+        );
+        return res.status(200).json(data[0]);
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 };

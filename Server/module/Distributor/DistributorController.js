@@ -8,6 +8,7 @@ const {
   getOneDistributorById,
   updateDistributorById,
   changeStatusById,
+  getAllRetailerByDistributorId,
 } = require("./DistributorService");
 
 const {
@@ -23,19 +24,22 @@ router.get("/", getAllDistributors);
 router.get("/email/", getOneDistributorByEmail);
 
 // get one entry by id
-router.get("/:id", getOneDistributorById);
+router.get("/:id/", getOneDistributorById);
 
 // create new entry
 router.post("/", createNewDistributor);
 
 // update entry by id
-router.put("/:id", updateDistributorById);
+router.put("/:id/", updateDistributorById);
 
 // delete entry by id
-router.delete("/:id", deleteDistributorById);
+router.delete("/:id/", deleteDistributorById);
+
+// get all Retailers by id
+router.get("/retailers/:id/", getAllRetailerByDistributorId);
 
 // change status
-router.delete("/status/:id", changeStatusById);
+router.delete("/status/:id/", changeStatusById);
 
 // get between two dates enrty by fc id
 router.get("/dates/:id/:start/:end/", getBetweenTwoDatesActivityByDistributorId);
