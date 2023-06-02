@@ -7,7 +7,10 @@ const {
   getOneDistributorByEmail,
   getOneDistributorById,
   updateDistributorById,
+  changeStatusById,
 } = require("./DistributorService");
+
+const {getAllActivityByFcId} = require('../Activity/ActivityService')
 
 // get all distributor data
 router.get("/", getAllDistributors);
@@ -27,4 +30,10 @@ router.put("/:id", updateDistributorById);
 // delete entry by id
 router.delete("/:id", deleteDistributorById);
 
+// get all activity by fc id
+router.delete("/:id", deleteDistributorById);
+
+
+// change status
+router.delete("/status/:id", changeStatusById);
 module.exports = router;

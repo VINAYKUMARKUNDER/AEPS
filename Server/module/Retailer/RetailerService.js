@@ -103,37 +103,37 @@ module.exports = {
   },
 
   // delete entry by id
-  deleteRetailerById: async (req, res) => {
-    try {
-      const find = await RetailerModule.findByPk(req.params.id);
-      if (!find)
-        res.status(200).json(`Data not found with fc id :${req.params.id}`);
+  // deleteRetailerById: async (req, res) => {
+  //   try {
+  //     const find = await RetailerModule.findByPk(req.params.id);
+  //     if (!find)
+  //       res.status(200).json(`Data not found with fc id :${req.params.id}`);
 
-      const data = await RetailerModule.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
+  //     const data = await RetailerModule.destroy({
+  //       where: {
+  //         id: req.params.id,
+  //       },
+  //     });
 
+  //     const fcId = await db.query(
+  //       `select fcId from distributor where distributorId = ${find.distributorId}`,
+  //       async (err, result) => {}
+  //     );
 
-      const fcId = await db.query(
-        `select fcId from distributor where distributorId = ${find.distributorId}`,
-        async (err, result) => {}
-      );
+  //     await db.query(
+  //       `INSERT INTO activity (description,distributorId,retailerId,fcId) VALUES ("reateler updated...",${find.distributorId},${req.params.id},${fcId[0][0].fcId})`,
+  //       async (err, result) => {}
+  //     );
 
-      await db.query(
-        `INSERT INTO activity (description,distributorId,retailerId,fcId) VALUES ("reateler updated...",${find.distributorId},${req.params.id},${fcId[0][0].fcId})`,
-        async (err, result) => {}
-      );
+  //     res.status(200).json("deleted successgully...");
 
-      res.status(200).json("deleted successgully...");
+  //     // } else res.status(200).json("something wrong...");
+  //   } catch (error) {
+  //     res.status(500).json(error);
+  //   }
+  // },
 
-      // } else res.status(200).json("something wrong...");
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-
+  // change status
   changeStatusById: async (req, res) => {
     try {
       const find = await RetailerModule.findByPk(req.params.id);
@@ -143,7 +143,7 @@ module.exports = {
           .json(`Data not found with fc id :${req.params.id}`);
       else {
         const getStatus = find.status;
-        console.log(getStatus)
+        console.log(getStatus);
         if (getStatus) {
           await db.query(
             `update Retailer set status=0 where id=${req.params.id}`,
@@ -159,14 +159,13 @@ module.exports = {
           `select fcId from distributor where distributorId = ${find.distributorId}`,
           async (err, result) => {}
         );
-  
+
         await db.query(
           `INSERT INTO activity (description,distributorId,retailerId,fcId) VALUES ("reateler status updated...",${find.distributorId},${req.params.id},${fcId[0][0].fcId})`,
           async (err, result) => {}
         );
-  
-        res.status(200).json(`updated status successgully...`);
 
+        res.status(200).json(`updated status successgully...`);
       }
     } catch (error) {}
   },

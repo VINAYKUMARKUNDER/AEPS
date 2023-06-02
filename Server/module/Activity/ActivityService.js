@@ -1,5 +1,6 @@
 
 const ActivityModule = require("./Activity");
+const db = require('../../database')
 
 module.exports = {
 
@@ -65,4 +66,14 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+
+  // get all entry by fc id
+  getAllActivityByFcId: async (req, res)=>{
+      try {
+         const data = db.query(`'select * from activity where fcId =${req.params.id}`, (err, result)=>{})
+        return  res.status(200).json(data);
+      } catch (error) {
+        return res.status(500).json(error);
+      }
+  }
 };
