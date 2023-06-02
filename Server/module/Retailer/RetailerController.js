@@ -10,6 +10,8 @@ const {
   changeStatusById,
 } = require("./RetailerService");
 
+const {getAllActivityByRetailerId, getActivityByRetailerIdAndByDate, getBetweenTwoDatesActivityByRetailerId} = require('../Activity/ActivityService')
+
 // get all entry
 router.get("/", getAllRetailer);
 
@@ -30,5 +32,15 @@ router.put("/:id", updateRetailerById);
 
 // change status
 router.put("/status/:id", changeStatusById);
+
+
+// get between two dates enrty by Retailer id
+router.get("/dates/:id/:start/:end/", getBetweenTwoDatesActivityByRetailerId);
+
+// get between two dates enrty by Retailer id
+router.get("/date/:id/:date/", getActivityByRetailerIdAndByDate);
+
+// get all enrty by Retailer id
+router.get("/activity/:id/", getAllActivityByRetailerId);
 
 module.exports = router;

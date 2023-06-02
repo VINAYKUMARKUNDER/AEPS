@@ -10,6 +10,11 @@ const {
   changeStatusById,
 } = require("./DistributorService");
 
+const {
+  getAllActivityByDistributorId,
+  getActivityByDistributorIdAndByDate,
+  getBetweenTwoDatesActivityByDistributorId,
+} = require("../Activity/ActivityService");
 
 // get all distributor data
 router.get("/", getAllDistributors);
@@ -29,9 +34,15 @@ router.put("/:id", updateDistributorById);
 // delete entry by id
 router.delete("/:id", deleteDistributorById);
 
-
-
-
 // change status
 router.delete("/status/:id", changeStatusById);
+
+// get between two dates enrty by fc id
+router.get("/dates/:id/:start/:end/", getBetweenTwoDatesActivityByDistributorId);
+
+// get between two dates enrty by fc id
+router.get("/date/:id/:date/", getActivityByDistributorIdAndByDate);
+
+// get all enrty by fc id
+router.get("/activity/:id/", getAllActivityByDistributorId);
 module.exports = router;
