@@ -14,7 +14,7 @@ const Activity = db.define(
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
@@ -41,17 +41,17 @@ const Activity = db.define(
 
 const Distributor = require("../Distributor/Distributor");
 const Retailer = require("../Retailer/Retailer");
-const TransactionHistory = require("../TransactionHistory/TransactionHistory");
+const Fc = require("../FcModule/FC");
 
 Activity.belongsTo(Distributor, {
     foreignKey: { allowNull: false },
-    onDelete: "CASCADE",
+    // onDelete: "CASCADE",
   });
 Activity.belongsTo(Retailer, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });
-Activity.belongsTo(TransactionHistory, {
+Activity.belongsTo(Fc, {
     foreignKey: { allowNull: false },
     onDelete: "CASCADE",
   });

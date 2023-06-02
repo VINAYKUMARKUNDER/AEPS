@@ -6,6 +6,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const fcRouters = require("../../module/FcModule/fcController");
+const activityRoutes = require('../../module/Activity/ActivityController')
 const DistributorRoutes = require("../../module/Distributor/DistributorController");
 const RetailerRoutes = require("../../module/Retailer/RetailerController");
 const ServiceRoutes = require("../../module/Service/ServiceController");
@@ -17,6 +18,7 @@ const imageUploadRoutes = require("../../module/UploadImage/uploadImageControlle
 
 
 app.use("/api/v1/fc", fcRouters);
+app.use("/api/v1/activity", activityRoutes);
 app.use("/api/v1/dist", DistributorRoutes);
 app.use("/api/v1/retailer", RetailerRoutes);
 app.use("/api/v1/service",  ServiceRoutes);

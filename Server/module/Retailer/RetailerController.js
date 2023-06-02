@@ -7,6 +7,7 @@ const {
   getOneRetailerByEmail,
   getOneRetailerById,
   updateRetailerById,
+  changeStatusById,
 } = require("./RetailerService");
 
 // get all entry
@@ -26,5 +27,8 @@ router.put("/:id", updateRetailerById);
 
 // deleted entry by id
 router.delete("/:id", deleteRetailerById);
+
+// change status
+router.put("/status/:id", changeStatusById);
 
 module.exports = router;

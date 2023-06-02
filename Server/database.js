@@ -147,17 +147,18 @@ const conn = new Sequelize(
 //       FOREIGN KEY (retailerId) REFERENCES retailer(id)
 //   );
 
-//   CREATE TABLE IF NOT EXISTS activity (
-//       activityId INTEGER NOT NULL PRIMARY KEY auto_Increment,
-//       date DATETIME(6),
-//       totalAmount INTEGER,
-//       distributorId INTEGER,
-//       retailerId INTEGER,
-//       transactionId INTEGER,
-//       FOREIGN KEY (distributorId) REFERENCES distributor(distributorId),
-//       FOREIGN KEY (retailerId) REFERENCES retailer(id),
-//       FOREIGN KEY (transactionId) REFERENCES transaction_history(transactionId)
-//   );
+// CREATE TABLE IF NOT EXISTS activity (
+//   activityId INTEGER NOT NULL PRIMARY KEY auto_Increment,
+//   date DATETIME(6),
+//   totalAmount INTEGER,
+//   description varchar(255),
+//   fcId Integer,
+//   distributorId INTEGER,
+//   retailerId INTEGER,
+//   FOREIGN KEY (distributorId) REFERENCES distributor(distributorId),
+//   FOREIGN KEY (retailerId) REFERENCES retailer(id),
+//   FOREIGN KEY (fcId) REFERENCES Fc(fcId)
+// );
 
 //   CREATE TABLE IF NOT EXISTS User (
 //       id INTEGER NOT NULL PRIMARY KEY auto_Increment,
