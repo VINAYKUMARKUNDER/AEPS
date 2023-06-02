@@ -1,22 +1,19 @@
-
 const ActivityModule = require("./Activity");
-const db = require('../../database');
+const db = require("../../database");
 
 const convertDateFormat = (rawDate) => {
- 
   let date = new Date(rawDate);
- 
+
   let year = date.getFullYear();
   let month = ("0" + (date.getMonth() + 1)).slice(-2);
   let day = ("0" + date.getDate()).slice(-2);
   let formattedDate = year + "-" + month + "-" + day;
-  console.log(rawDate,formattedDate)
+  console.log(rawDate, formattedDate);
   return formattedDate;
 };
 
 module.exports = {
-
-    // get all entry
+  // get all entry
   getAllActivity: async (req, res) => {
     try {
       const data = await ActivityModule.findAll();
@@ -80,51 +77,49 @@ module.exports = {
   },
 
   // get all entry by fc id
-  getAllActivityByFcId: async (req, res)=>{
-
-      try {
-         const data = await db.query(`select * from activity where fcId =${req.params.id};`, (err, result)=>{});
-        return  res.status(200).json(data[0]);
-      } catch (error) {
-        return res.status(500).json(error);
-      }
+  getAllActivityByFcId: async (req, res) => {
+    try {
+      const data = await db.query(
+        `select * from activity where fcId =${req.params.id};`,
+        (err, result) => {}
+      );
+      return res.status(200).json(data[0]);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   },
 
   // get all entry by fc id and date
-  getActivityByFcIdAndByDate: async (req, res)=>{
+  getActivityByFcIdAndByDate: async (req, res) => {
     try {
-      const date = convertDateFormat(req.params.start);
-      
-      
+      const date =req.params.date;
+
       const data = await db.query(
-        `SELECT * FROM activity
-      WHERE date = '${date}'  AND fcId = ${req.params.id}'`,
+        `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND fcId = ${req.params.id};`,
         (err, result) => {}
       );
       if (data[0].length == 0)
         return res
           .status(200)
-          .json(`data not found bitween dates ${start} and ${end}`);
+          .json(`data not found with date: ${start}`);
       else {
-        console.log(data[0])
+      
         return res.status(200).json(data[0]);
       }
     } catch (error) {
       return res.status(500).json(error);
     }
-},
-
-
+  },
 
   // get all entry by fc id and dates
-  getBetweenTwoDatesActivityByFcId: async (req, res)=>{
+  getBetweenTwoDatesActivityByFcId: async (req, res) => {
     try {
       const start = convertDateFormat(req.params.start);
       const end = convertDateFormat(req.params.end);
-      
+
       const data = await db.query(
         `SELECT * FROM activity
-      WHERE date >= '${start}' AND date <= '${end} AND fcId = ${req.params.id}'`,
+      WHERE date >= '${start}' AND date <= '${end}' AND fcId = ${req.params.id}`,
         (err, result) => {}
       );
       if (data[0].length == 0)
@@ -132,61 +127,58 @@ module.exports = {
           .status(200)
           .json(`data not found bitween dates ${start} and ${end}`);
       else {
-        console.log(data[0])
+    
         return res.status(200).json(data[0]);
       }
     } catch (error) {
       return res.status(500).json(error);
     }
-},
-
+  },
 
   // get all entry by distributor id
-  getAllActivityByDistributorId: async (req, res)=>{
-
-      try {
-         const data = await db.query(`select * from activity where distributorId =${req.params.id};`, (err, result)=>{});
-        return  res.status(200).json(data[0]);
-      } catch (error) {
-        return res.status(500).json(error);
-      }
+  getAllActivityByDistributorId: async (req, res) => {
+    try {
+      const data = await db.query(
+        `select * from activity where distributorId =${req.params.id};`,
+        (err, result) => {}
+      );
+      return res.status(200).json(data[0]);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   },
 
   // get all entry by distributor id and date
-  getActivityByDistributorIdAndByDate: async (req, res)=>{
+  getActivityByDistributorIdAndByDate: async (req, res) => {
     try {
-      const date = convertDateFormat(req.params.start);
-      
-      
+      const date = convertDateFormat(req.params.date);
+
       const data = await db.query(
-        `SELECT * FROM activity
-      WHERE date = '${date}'  AND DistributorId = ${req.params.id}'`,
+        `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND DistributorId = ${req.params.id};`,
         (err, result) => {}
       );
       if (data[0].length == 0)
         return res
           .status(200)
-          .json(`data not found bitween dates ${start} and ${end}`);
+          .json(`data not found with date: ${start}`);
       else {
-        console.log(data[0])
+    
         return res.status(200).json(data[0]);
       }
     } catch (error) {
       return res.status(500).json(error);
     }
-},
-
-
+  },
 
   // get all entry by distributor id and dates
-  getBetweenTwoDatesActivityByDistributorId: async (req, res)=>{
+  getBetweenTwoDatesActivityByDistributorId: async (req, res) => {
     try {
       const start = convertDateFormat(req.params.start);
       const end = convertDateFormat(req.params.end);
-      
+
       const data = await db.query(
         `SELECT * FROM activity
-      WHERE date >= '${start}' AND date <= '${end} AND DistributorId = ${req.params.id}'`,
+      WHERE date >= '${start}' AND date <= '${end}' AND DistributorId = ${req.params.id}`,
         (err, result) => {}
       );
       if (data[0].length == 0)
@@ -194,79 +186,70 @@ module.exports = {
           .status(200)
           .json(`data not found bitween dates ${start} and ${end}`);
       else {
-        console.log(data[0])
+      
         return res.status(200).json(data[0]);
       }
     } catch (error) {
       return res.status(500).json(error);
     }
-},
+  },
 
+  // get all entry by Retailer id
+  getAllActivityByRetailerId: async (req, res) => {
+    try {
+      const data = await db.query(
+        `select * from activity where RetailerId =${req.params.id};`,
+        (err, result) => {}
+      );
+      return res.status(200).json(data[0]);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 
+  // get all entry by Retailer id and date
+  getActivityByRetailerIdAndByDate: async (req, res) => {
+    try {
+     
 
+      const data = await db.query(
+        `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND retailerId = ${req.params.id};`,
+        (err, result) => {}
+      );
+      if (data[0].length == 0)
+        return res
+          .status(200)
+          .json(`data not found with date: ${start}`);
+      else {
+ 
+        return res.status(200).json(data[0]);
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 
+  // get all entry by Retailer id and dates
+  getBetweenTwoDatesActivityByRetailerId: async (req, res) => {
+    try {
+      const start = convertDateFormat(req.params.start);
+      const end = convertDateFormat(req.params.end);
 
-// get all entry by Retailer id
-getAllActivityByRetailerId: async (req, res)=>{
-
-  try {
-     const data = await db.query(`select * from activity where RetailerId =${req.params.id};`, (err, result)=>{});
-    return  res.status(200).json(data[0]);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-},
-
-// get all entry by Retailer id and date
-getActivityByRetailerIdAndByDate: async (req, res)=>{
-try {
-  const date = convertDateFormat(req.params.start);
-  
-  
-  const data = await db.query(
-    `SELECT * FROM activity
-  WHERE date = '${date}'  AND RetailerId = ${req.params.id}'`,
-    (err, result) => {}
-  );
-  if (data[0].length == 0)
-    return res
-      .status(200)
-      .json(`data not found bitween dates ${start} and ${end}`);
-  else {
-    console.log(data[0])
-    return res.status(200).json(data[0]);
-  }
-} catch (error) {
-  return res.status(500).json(error);
-}
-},
-
-
-
-// get all entry by Retailer id and dates
-getBetweenTwoDatesActivityByRetailerId: async (req, res)=>{
-try {
-  const start = convertDateFormat(req.params.start);
-  const end = convertDateFormat(req.params.end);
-  
-  const data = await db.query(
-    `SELECT * FROM activity
-  WHERE date >= '${start}' AND date <= '${end} AND RetailerId = ${req.params.id}'`,
-    (err, result) => {}
-  );
-  if (data[0].length == 0)
-    return res
-      .status(200)
-      .json(`data not found bitween dates ${start} and ${end}`);
-  else {
-    console.log(data[0])
-    return res.status(200).json(data[0]);
-  }
-} catch (error) {
-  return res.status(500).json(error);
-}
-},
-
-
-
+      const data = await db.query(
+        `SELECT * FROM activity
+  WHERE date >= '${start}' AND date <= '${end}' AND RetailerId = ${req.params.id}`,
+        (err, result) => {}
+      );
+      if (data[0].length == 0)
+        return res
+          .status(200)
+          .json(`data not found bitween dates ${start} and ${end}`);
+      else {
+     
+        return res.status(200).json(data[0]);
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 };
