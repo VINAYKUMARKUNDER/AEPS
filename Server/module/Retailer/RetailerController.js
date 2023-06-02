@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   createNewRetailer,
-  deleteRetailerById,
+
   getAllRetailer,
   getOneRetailerByEmail,
   getOneRetailerById,
@@ -26,7 +26,7 @@ router.post("/", createNewRetailer);
 router.put("/:id", updateRetailerById);
 
 // deleted entry by id
-router.delete("/:id", deleteRetailerById);
+// router.delete("/:id", deleteRetailerById);
 
 // change status
 router.put("/status/:id", changeStatusById);

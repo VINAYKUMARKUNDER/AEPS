@@ -11,6 +11,8 @@ const {
   updateFcById,
 } = require("./FcService");
 
+const {getAllActivityByFcId} = require('../Activity/ActivityService')
+
 
 
 // get all fc data
@@ -30,5 +32,8 @@ router.put("/:id",verifyToken, updateFcById);
 
 // deleted enrty by id
 router.delete("/:id",verifyToken,deleteFcById);
+
+// get all enrty by fc id
+router.get("/activity/:id",getAllActivityByFcId);
 
 module.exports = router;

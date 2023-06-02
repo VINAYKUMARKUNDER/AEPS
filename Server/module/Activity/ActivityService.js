@@ -69,9 +69,10 @@ module.exports = {
 
   // get all entry by fc id
   getAllActivityByFcId: async (req, res)=>{
+    console.log(req.params.id)
       try {
-         const data = db.query(`'select * from activity where fcId =${req.params.id}`, (err, result)=>{})
-        return  res.status(200).json(data);
+         const data = await db.query(`select * from activity where fcId =${req.params.id};`, (err, result)=>{});
+        return  res.status(200).json(data[0]);
       } catch (error) {
         return res.status(500).json(error);
       }
