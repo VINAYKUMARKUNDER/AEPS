@@ -58,6 +58,14 @@ const Distributor = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    areaName:{
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    bio:{
+      type:DataTypes.STRING,
+      allowNull:false
+    },
 
     password: {
       type: DataTypes.STRING,

@@ -65,7 +65,9 @@ module.exports = {
       if (!find)
         res.status(200).json(`Data not found with fc id :${req.params.id}`);
       else {
-        const data = await FcModule.update(req.body, {
+        const rawData = req.body;
+        rawData.updateAt=new Date();
+        const data = await FcModule.update(rawData, {
           where: {
             fc_id: req.params.id,
           },
