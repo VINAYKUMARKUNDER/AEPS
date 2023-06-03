@@ -1,8 +1,27 @@
 
 const multer = require("multer");
 
+const upload = multer({
+  limits:1024*1024*5,
+  fileFilter: (req, file, done)=>{
+    if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+      done(null, true);
+    }else{
+      done('file type not supported', false);
+    }
+  }
+});
+
 module.exports = {
   uploadProfile: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/profileImage");
@@ -14,6 +33,14 @@ module.exports = {
   }).single("profile"),
 
   uploadAadharBack: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/aadharBackImage");
@@ -25,6 +52,14 @@ module.exports = {
   }).single("aadharBack"),
 
   uploadAadharFront: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/aadharFrontImage");
@@ -33,9 +68,17 @@ module.exports = {
         cb(null, file.fieldname + "-" + Date.now() + ".jpg");
       },
     }),
-  }).single("aadharBack"),
+  }).single("aadharFront"),
 
   uploadPanCardImage: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/PanCardImage");
@@ -47,6 +90,14 @@ module.exports = {
   }).single("pancard"),
 
   uploadPoliceVarificationImage: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/PoliceVarificationImage");
@@ -58,6 +109,14 @@ module.exports = {
   }).single("policeVarification"),
 
   uploadShopImage: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/ShopImage");
@@ -69,6 +128,14 @@ module.exports = {
   }).single("shopImage"),
 
   uploadMapingImage: multer({
+    limits:1024*1024*5,
+    fileFilter: (req, file, done)=>{
+      if(file.mimetype==='image/jpg' || file.mimetype==='image/png' || file.mimetype==='image/jpeg'){
+        done(null, true);
+      }else{
+        done('file type not supported', false);
+      }
+    },
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, "uploads/MapingImage");
