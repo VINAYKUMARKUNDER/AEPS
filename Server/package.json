@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.1.1",
     "express": "^4.18.2",
+    "fs.promises": "^0.1.2",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
@@ -23,6 +24,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.3.0",
     "nodemon": "^2.0.22",
+    "path": "^0.12.7",
     "sequelize": "^6.31.1"
   }
 }
