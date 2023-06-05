@@ -128,14 +128,7 @@ const Retailer = db.define(
       type: DataTypes.DATE,
       allowNull:true
     },
-    longitude:{
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    latitude:{
-      type: DataTypes.STRING,
-      allowNull:true
-    }
+  
 
 
   },

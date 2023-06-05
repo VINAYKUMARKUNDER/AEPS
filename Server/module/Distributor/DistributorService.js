@@ -1,6 +1,9 @@
 const db = require("../../database");
 const bcrypt = require("bcrypt");
 const distributorModule = require("./Distributor");
+const geoip = require('geoip-lite');
+const {getIPAddress} = require('../../routers/Common');
+const os = require('os');
 
 module.exports = {
   // get all entry
@@ -55,7 +58,17 @@ module.exports = {
 
       const distributorId = data.dataValues.distributorId;
       const fcId = data.dataValues.fcId;
-      console.log(distributorId, fcId);
+      const ipAddress = await getIPAddress();
+      const geo = geoip.lookup(ipAddress);
+      const latitude = geo.ll[0];
+      const longitude = geo.ll[1];
+      const systemName = os.hostname();
+      const type = "Distributor";
+      const userEmail = data.dataValues.email;
+
+      await db.query(`INSERT INTO registerActivity (userEmail, userType, latitude, longitude, ipAddress, systemName)
+      VALUES (${userEmail}, '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
+    
       await db.query(
         `INSERT INTO activity (description,distributorId,fcId) VALUES ("new distributor creted..",${distributorId},${fcId})`,
         async (err, result) => {}

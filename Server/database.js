@@ -13,6 +13,16 @@ const conn = new Sequelize(
 
 // const createTable = conn.query(
 //   `
+// create table IF NOT EXISTS registerActivity (
+// 	rActivityId INTEGER NOT NULL PRIMARY KEY auto_Increment,
+//     userId Integer,
+//     userType varchar(40),
+//     latitude varchar(20),
+//     longitude varchar(20),
+//     ipAddress varchar(40),
+//     systemName varchar(40),
+//     dateAndTime timestamp
+// );
 //   CREATE TABLE IF NOT EXISTS fc (
 //       fcId INTEGER NOT NULL PRIMARY KEY auto_Increment,
 //       country VARCHAR(30),
@@ -41,8 +51,6 @@ const conn = new Sequelize(
 //       image varchar(100),
 //       createAt timestamp,
 //       updateAt timestamp,
-//       longitude varchar(16),
-//       latitude varchar(100),
 //       status boolean
 //   );
 
@@ -76,8 +84,6 @@ const conn = new Sequelize(
 //       shopPic varchar(100),
 //       createAt timestamp,
 //       updateAt timestamp,
-//       longitude varchar(16),
-//       latitude varchar(100),
 //       fcId INTEGER,
 //       FOREIGN KEY (fcId) REFERENCES fc(fcId)
 //   );
@@ -112,8 +118,6 @@ const conn = new Sequelize(
 //       typeOfBusiness VARCHAR(255),
 //       createAt timestamp,
 //       updateAt timestamp,
-//       longitude varchar(16),
-//       latitude varchar(100),
 //       distributorId INTEGER,
 //       FOREIGN KEY (distributorId) REFERENCES distributor(distributorId)
 //   );

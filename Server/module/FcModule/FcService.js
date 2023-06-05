@@ -1,6 +1,12 @@
 const bcrypt = require("bcrypt");
 const db = require("../../database");
 const FcModule = require("./FC");
+const geoip = require('geoip-lite');
+const {getIPAddress} = require('../../routers/Common');
+const os = require('os');
+
+
+
 
 module.exports = {
   // get all entry
@@ -46,28 +52,27 @@ module.exports = {
   createNewFc: async (req, res) => {
     try {
       const rawData = req.body;
-      let userLocation = navigator.geolocation;
-      if(userLocation) {
-         userLocation.getCurrentPosition(success);
-      } else {
-         "The geolocation API is not supported by your browser.";
-      }
-   
-   function success(data) {
-      let lat = data.coords.latitude;
-      let long = data.coords.longitude;
-     rawData.latitude=lat;
-     rawData.longitude=long;
-   }
 
-
-      
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(rawData.password, salt);
       rawData.password = hash;
       rawData.createAt=new Date();
       rawData.updateAt=new Date();
       const data = await FcModule.create(rawData);
+
+
+      const ipAddress = await getIPAddress();
+      const geo = geoip.lookup(ipAddress);
+      const latitude = geo.ll[0];
+      const longitude = geo.ll[1];
+      const systemName = os.hostname();
+      const userEmail = data.dataValues.email;
+      const type = "Fc";
+
+      await db.query(`INSERT INTO registerActivity (userEmail, userType, latitude, longitude, ipAddress, systemName)
+      VALUES (${userEmail}, '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
+    
+
       res.status(201).json((msg = "new data create successfully..."));
     } catch (error) {
       res.status(500).json(error);

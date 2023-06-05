@@ -32,7 +32,7 @@ let bdcApi = "https://api.bigdatacloud.net/data/reverse-geocode-client"
 
 
 
-
+console.log(navigator.geolocation)
 
 
 // myGeolocator()
