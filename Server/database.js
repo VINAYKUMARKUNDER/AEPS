@@ -41,6 +41,8 @@ const conn = new Sequelize(
 //       image varchar(100),
 //       createAt timestamp,
 //       updateAt timestamp,
+//       longitude varchar(16),
+//       latitude varchar(100),
 //       status boolean
 //   );
 
@@ -74,6 +76,8 @@ const conn = new Sequelize(
 //       shopPic varchar(100),
 //       createAt timestamp,
 //       updateAt timestamp,
+//       longitude varchar(16),
+//       latitude varchar(100),
 //       fcId INTEGER,
 //       FOREIGN KEY (fcId) REFERENCES fc(fcId)
 //   );
@@ -108,6 +112,8 @@ const conn = new Sequelize(
 //       typeOfBusiness VARCHAR(255),
 //       createAt timestamp,
 //       updateAt timestamp,
+//       longitude varchar(16),
+//       latitude varchar(100),
 //       distributorId INTEGER,
 //       FOREIGN KEY (distributorId) REFERENCES distributor(distributorId)
 //   );

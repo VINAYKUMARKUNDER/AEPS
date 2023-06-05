@@ -46,6 +46,22 @@ module.exports = {
   createNewFc: async (req, res) => {
     try {
       const rawData = req.body;
+      let userLocation = navigator.geolocation;
+      if(userLocation) {
+         userLocation.getCurrentPosition(success);
+      } else {
+         "The geolocation API is not supported by your browser.";
+      }
+   
+   function success(data) {
+      let lat = data.coords.latitude;
+      let long = data.coords.longitude;
+     rawData.latitude=lat;
+     rawData.longitude=long;
+   }
+
+
+      
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(rawData.password, salt);
       rawData.password = hash;
