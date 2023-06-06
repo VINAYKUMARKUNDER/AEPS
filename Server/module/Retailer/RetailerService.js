@@ -1,9 +1,9 @@
 const db = require("../../database");
 const bcrypt = require("bcrypt");
 const RetailerModule = require("./Retailer");
-const geoip = require('geoip-lite');
-const {getIPAddress} = require('../../routers/Common');
-const os = require('os');
+const geoip = require("geoip-lite");
+const { getIPAddress } = require("../../routers/Common");
+const os = require("os");
 
 module.exports = {
   // get all entry
@@ -12,7 +12,11 @@ module.exports = {
       const data = await RetailerModule.findAll();
       res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
     }
   },
 
@@ -24,7 +28,11 @@ module.exports = {
         res.status(200).json("data not found with id: ", req.params.id);
       else res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
     }
   },
 
@@ -36,12 +44,23 @@ module.exports = {
         (err, result) => {}
       );
       if (data[0].length == 0)
-        res
-          .status(404)
-          .json(`Data not found with Retailer email id : ${req.body.email}`);
-      else res.status(200).json(data[0][0]);
+        return res.status(200).json({
+          status: 200,
+          msg: `Data not found with Retailer email id : ${req.body.email}`,
+          success: 01,
+        });
+      else
+        return res.status(201).json({
+          status: 201,
+          msg: "create new data successfully",
+          success: 1,
+        });
     } catch (error) {
-      res.status(500).json({ error });
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
     }
   },
 
@@ -65,9 +84,11 @@ module.exports = {
       const type = "Retailer";
       const userEmail = data.dataValues.email;
 
-      await db.query(`INSERT INTO registerActivity (userEmail, userType, latitude, longitude, ipAddress, systemName)
-      VALUES (${userEmail}, '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
-    
+      await db.query(
+        `INSERT INTO registerActivity (userEmail, userType, latitude, longitude, ipAddress, systemName)
+      VALUES (${userEmail}, '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`,
+        (err, result) => {}
+      );
 
       const fcId = await db.query(
         `select fcId from distributor where distributorId = ${distributorId}`,
@@ -78,9 +99,17 @@ module.exports = {
         async (err, result) => {}
       );
       //  console.log(fcId[0][0].fcId)
-      res.status(201).json("new entry created successfully...");
+      return res.status(201).json({
+        status: 201,
+        msg: "create new data successfully",
+        success: 1,
+      });
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
     }
   },
 
@@ -113,7 +142,11 @@ module.exports = {
         } else res.status(200).json("already updated...");
       }
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
     }
   },
 
@@ -144,7 +177,11 @@ module.exports = {
 
   //     // } else res.status(200).json("something wrong...");
   //   } catch (error) {
-  //     res.status(500).json(error);
+  //     return res.status(500).json({
+    //     status: 500,
+    //     msg: "Internal sarver error!!",
+    //     success: 0
+    // });
   //   }
   // },
 
@@ -153,12 +190,16 @@ module.exports = {
     try {
       const find = await RetailerModule.findByPk(req.params.id);
       if (!find)
-        return res
-          .status(404)
-          .json(`Data not found with fc id :${req.params.id}`);
+      if (data[0].length == 0)
+      return res.status(200).json({
+        status: 200,
+        msg: `Data not found with Retailer email id : ${req.body.email}`,
+        success: 01,
+      });
+  
+     
       else {
         const getStatus = find.status;
-        console.log(getStatus);
         if (getStatus) {
           await db.query(
             `update Retailer set status=0 where id=${req.params.id}`,
@@ -180,8 +221,18 @@ module.exports = {
           async (err, result) => {}
         );
 
-        res.status(200).json(`updated status successgully...`);
+        return res.status(200).json({
+          status: 200,
+          msg: "status chenged successfully...",
+          success: 1,
+        });
       }
-    } catch (error) {}
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0,
+      });
+    }
   },
 };

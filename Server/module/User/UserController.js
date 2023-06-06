@@ -5,8 +5,9 @@ const UserModule = require("./User");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const json = require("jsonwebtoken");
-const {getIPAddress} = require('../../routers/Common');
-const geoip = require('geoip-lite');
+const { getIPAddress } = require("../../routers/Common");
+const geoip = require("geoip-lite");
+const os = require('os');
 
 // get all entry
 router.get("/", async (req, res) => {
@@ -14,7 +15,11 @@ router.get("/", async (req, res) => {
     const data = await UserModule.findAll();
     res.status(200).json(data);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json({
+      status: 500,
+      msg: "Internal sarver error!!",
+      success: 0
+  });
   }
 });
 
@@ -30,25 +35,35 @@ router.post("/login", async (req, res) => {
     });
   }
   const range = await userMaping(userData.email, body.type);
-  if(!range)res.status(500).json('you are out of range...');
   console.log(range)
-  const result = bcrypt.compareSync(body.password, userData.password);
+  if (!range) res.status(500).json({
+    status:500,
+    msg:`out of range`,
+    success:0
+  });
+  else {
+    const result = bcrypt.compareSync(body.password, userData.password);
 
-  if (result) {
-    userData.password = undefined;
-    const jsontoken = json.sign({ result: userData }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    return res.json({
-      success: 1,
-      message: "login successfully",
-      token: jsontoken,
-    });
-  } else {
-    return res.json({
-      success: 0,
-      data: "Invalid email or password",
-    });
+    if (result) {
+      userData.password = undefined;
+      const jsontoken = json.sign(
+        { result: userData },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      return res.json({
+        success: 1,
+        message: "login successfully",
+        token: jsontoken,
+      });
+    } else {
+      return res.json({
+        success: 0,
+        data: "Invalid email or password",
+      });
+    }
   }
 });
 
@@ -86,28 +101,31 @@ const userMaping = async (userEmail, userType) => {
   const userLongitude = user.longitude;
 
   const ipAddress = await getIPAddress();
-  // const geo = geoip.lookup(ipAddress);
-  // const currentLatitude = geo.ll[0];
-  // const currentLongitude = geo.ll[1];
+  const geo = geoip.lookup(ipAddress);
+  const currentLatitude = geo.ll[0];
+  const currentLongitude = geo.ll[1];
+  const systemName = os.hostname();
 
   // define login range in km
   const range = 5;
-  console.log(ipAddress)
+  console.log(currentLatitude);
 
   // get your range
-  // const distance = haversineDistance(
-  //   userLatitude,
-  //   userLongitude,
-  //   currentLatitude,
-  //   currentLongitude
-  // );
-  // if(distance> range)return false;
-  // else true;
-  return true;
+  const distance = haversineDistance(
+    userLatitude,
+    userLongitude,
+    currentLatitude,
+    currentLongitude
+  );
+  console.log({distance})
+  if (distance > range) return false;
+  else {
+    await db.query(`INSERT INTO login (userEmail, userType, latitude, longitude, ipAddress, systemName)
+    VALUES (${userEmail}, '${userType}', '${currentLatitude}','${currentLongitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
+  
+    return true
+  };
 };
-
-
-
 
 // calculate distance
 const haversineDistance = (lat1, lon1, lat2, lon2) => {
@@ -131,6 +149,5 @@ const haversineDistance = (lat1, lon1, lat2, lon2) => {
 
   return distance;
 };
-
 
 module.exports = router;

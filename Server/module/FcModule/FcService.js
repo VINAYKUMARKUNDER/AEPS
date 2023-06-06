@@ -15,7 +15,11 @@ module.exports = {
       const allData = await FcModule.findAll();
       res.status(200).json(allData);
     } catch (error) {
-      res.status(200).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -27,7 +31,11 @@ module.exports = {
         res.status(200).json(`Data not found with fc id :${req.params.id}`);
       else res.status(200).json(data);
     } catch (error) {
-      res.status(200).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -44,7 +52,11 @@ module.exports = {
           .json(`Data not found with fc email id : ${req.body.email}`);
       else res.status(200).json(data[0][0]);
     } catch (error) {
-      res.status(500).json({ error });
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -70,12 +82,20 @@ module.exports = {
       const type = "Fc";
 
       await db.query(`INSERT INTO registerActivity (userEmail, userType, latitude, longitude, ipAddress, systemName)
-      VALUES (${userEmail}, '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
+      VALUES ('${userEmail}', '${type}', '${latitude}','${longitude}', '${ipAddress}', '${systemName}');`, (err, result)=>{});
     
 
-      res.status(201).json((msg = "new data create successfully..."));
+      return res.status(201).json({
+        status: 201,
+        msg: "create new data successfully",
+        success: 1
+    });
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -97,7 +117,11 @@ module.exports = {
         else res.status(200).json("update successfully....");
       }
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -112,7 +136,11 @@ module.exports = {
       if (data == 1) res.status(200).json("deleted successfully");
       else res.status(200).json(`Data not found with fc id :${req.params.id}`);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 };

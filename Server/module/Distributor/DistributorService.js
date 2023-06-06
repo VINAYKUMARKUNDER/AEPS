@@ -12,7 +12,11 @@ module.exports = {
       const data = await distributorModule.findAll();
       res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -23,7 +27,11 @@ module.exports = {
       if (!data) res.status(200).json("data not found with id:", req.params.id);
       else res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -40,7 +48,11 @@ module.exports = {
           .json(`Data not found with Distributor email id : ${req.body.email}`);
       else res.status(200).json(data[0][0]);
     } catch (error) {
-      res.status(500).json({ error });
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -73,9 +85,19 @@ module.exports = {
         `INSERT INTO activity (description,distributorId,fcId) VALUES ("new distributor creted..",${distributorId},${fcId})`,
         async (err, result) => {}
       );
-      res.status(201).json("created new entry successfully...");
+
+
+     return res.status(201).json({
+        status: 201,
+        msg: "create new data successfully",
+        success: 1
+    });
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -102,7 +124,11 @@ module.exports = {
         } else res.status(200).json("already updated...");
       }
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -125,7 +151,11 @@ module.exports = {
       );
       res.status(200).json("deleted successfully...");
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -155,7 +185,12 @@ module.exports = {
         );
         res.status(200).json("updated successgully...");
       }
-    } catch (error) {}
+    } catch (error) {return res.status(500).json({
+      status: 500,
+      msg: "Internal sarver error!!",
+      success: 0
+  });
+}
   },
 
   getAllRetailerByDistributorId: async (req, res) => {
@@ -171,7 +206,11 @@ module.exports = {
         return res.status(200).json(data[0]);
       }
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 };

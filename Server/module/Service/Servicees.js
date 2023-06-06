@@ -8,7 +8,11 @@ module.exports = {
       const data = await ServiceModule.findAll();
       res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -19,7 +23,11 @@ module.exports = {
       if (!data) res.status(200).json("entry not found by id: ", req.params.id);
       else res.status(200).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -29,7 +37,11 @@ module.exports = {
       const data = await ServiceModule.create(req.body);
       res.status(201).json("new entry created successfully...");
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -44,7 +56,11 @@ module.exports = {
       if (data[0] == 1) res.status(200).json("updated successfully...");
       else res.status(200).json("already updated...");
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -60,7 +76,11 @@ module.exports = {
         res.status(200).json("entry not found with id: ", req.params.id);
       else res.status.json("deleted successfully...");
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 };

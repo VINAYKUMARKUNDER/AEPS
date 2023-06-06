@@ -19,7 +19,11 @@ module.exports = {
       const data = await Transaction_historyModule.findAll();
       return res.status(200).json(data);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -31,7 +35,11 @@ module.exports = {
         return res.status(200).json("data not found with id: ", req.params.id);
       else return res.status(200).json(data);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -44,7 +52,11 @@ module.exports = {
       const data = await Transaction_historyModule.create(rawData);
       return res.status(201).json("new entry created successfully...");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -59,7 +71,11 @@ module.exports = {
       if (data[0] == 1) return res.status(200).json("updated successfully...");
       else return res.status(200).json("already updated...");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -75,7 +91,11 @@ module.exports = {
         return res.status(200).json("entry not found with id: ", req.params.id);
       else return res.status.json("deleted successfully...");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -102,7 +122,11 @@ module.exports = {
           .json(`data not found bitween dates ${start} and ${end}`);
       else return res.status(200).json(data[0]);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -121,7 +145,11 @@ module.exports = {
           .json(`data not found with distributor id ${req.params.id}`);
       else return res.status(200).json(data[0]);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 
@@ -138,7 +166,11 @@ module.exports = {
           .json(`data not found with retailer id ${req.params.id}`);
       else return res.status(200).json(data[0]);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json({
+        status: 500,
+        msg: "Internal sarver error!!",
+        success: 0
+    });
     }
   },
 };

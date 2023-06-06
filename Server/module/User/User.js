@@ -1,29 +1,54 @@
-
-const {DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 const db = require("../../database");
 
-// Define the User model
-const User = db.define('Users', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  email: {
-    type:DataTypes.STRING,
-    allowNull:false
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  type: {
-    type: DataTypes.ENUM('fc', 'distributor', 'retailer'),
-    allowNull: false,
-  },
- 
-});
 
 
+const Login = db.define(
+  "login",
+  {
+    loginId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    userEmail:{
+        type: DataTypes.STRING,
+        allowNull: false
+    }, 
+    userType: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    latitude: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    longitude: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 
-module.exports = User;
+    ipAddress: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    systemName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    // dateAndTime: {
+    //     type: DataTypes.timestamps,
+    //     allowNull: false
+    // },
+   
+  },
+  {
+    tableName: "Login",
+    timestamps: false,
+  }
+);
+
+  
+
+module.exports = Login;

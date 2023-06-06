@@ -15,7 +15,7 @@ const conn = new Sequelize(
 //   `
 // create table IF NOT EXISTS registerActivity (
 // 	rActivityId INTEGER NOT NULL PRIMARY KEY auto_Increment,
-//     userId Integer,
+//     userEmail varchar(50),
 //     userType varchar(40),
 //     latitude varchar(20),
 //     longitude varchar(20),
@@ -178,6 +178,17 @@ const conn = new Sequelize(
 //       type VARCHAR(40),
 //       createdAt DATETIME(6),
 //       updatedAt DATETIME(6)
+// );
+
+// create table IF NOT EXISTS Login (
+// 	loginId INTEGER NOT NULL PRIMARY KEY auto_Increment,
+//     userEmail varchar(50),
+//     userType varchar(40),
+//     latitude varchar(20),
+//     longitude varchar(20),
+//     ipAddress varchar(40),
+//     systemName varchar(40),
+//     dateAndTime timestamp
 // );
 
 //   CREATE TABLE IF NOT EXISTS ticket (
