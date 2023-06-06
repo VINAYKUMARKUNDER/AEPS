@@ -26,8 +26,18 @@ module.exports = {
     try {
       const data = await TicketModule.findByPk(req.params.id);
       if (!data)
-        res.status(200).json("data not found with id: ", req.params.id);
-      else res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        msg: `data not found with id: ${req.params.id}`,
+        success: 0,
+        data:data
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `ok`,
+        success: 1,
+        data:data
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -41,7 +51,12 @@ module.exports = {
   createTicket: async (req, res) => {
     try {
       const data = await TicketModule.create(req.body);
-      res.status(201).json("new entry created successfully...");
+      return res.status(201).json({
+        status: 201,
+        msg: "creatd new successfully..",
+        success: 1,
+        data: data[0]
+    });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -54,13 +69,31 @@ module.exports = {
   // update a entry by id
   updateTicketById: async (req, res) => {
     try {
+      const find = await RetailerModule.findByPk(req.params.id);
+      if (!find)
+      return res.status(404).json({
+        status: 404,
+        msg: `Data found with id : ${req.body.id}`,
+        success: 0,
+      });
+      else {
       const data = await TicketModule.update(req.body, {
         where: {
-          ticket_id: req.params.id,
+          ticketId: req.params.id,
         },
       });
-      if (data[0] == 1) res.status(200).json("updated successfully...");
-      else res.status(200).json("already updated...");
+      if (data[0]==0)
+      return res.status(200).json({
+        status: 200,
+        msg: `already updated...`,
+        success: 0,
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `updated successfully.`,
+        success: 1,
+      });
+    }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -73,14 +106,31 @@ module.exports = {
   // delete a entry by id
   deleteTicketById: async (req, res) => {
     try {
+      const find = await RetailerModule.findByPk(req.params.id);
+      if (!find)
+      return res.status(404).json({
+        status: 404,
+        msg: `Data found with id : ${req.body.id}`,
+        success: 0,
+      });
+      else {
       const data = await TicketModule.destroy({
         where: {
-          ticket_id: req.params.id,
+          ticketId: req.params.id,
         },
       });
-      if (data == 0)
-        res.status(200).json("entry not found with id: ", req.params.id);
-      else res.status.json("deleted successfully...");
+      if (data[0]==0)
+      return res.status(200).json({
+        status: 200,
+        msg: `something worng..`,
+        success: 0,
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `deleted successfully.`,
+        success: 1,
+      });
+    }
     } catch (error) {
       return res.status(500).json({
         status: 500,

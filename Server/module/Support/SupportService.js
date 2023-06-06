@@ -25,8 +25,19 @@ module.exports = {
   getOneSupportById: async (req, res) => {
     try {
       const data = await SupportModule.findByPk(req.params.id);
-      if (!data) res.status(200).json("entry not found by id: ", req.params.id);
-      else res.status(200).json(data);
+      if (!data)
+      return res.status(200).json({
+        status: 200,
+        msg: `data not found with id: ${req.params.id}`,
+        success: 0,
+        data:data
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `ok`,
+        success: 1,
+        data:data
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -40,7 +51,12 @@ module.exports = {
   createNewSupport: async (req, res) => {
     try {
       const data = await SupportModule.create(req.body);
-      res.status(201).json("new entry created successfully...");
+      return res.status(201).json({
+        status: 201,
+        msg: "creatd new successfully..",
+        success: 1,
+        data: data[0]
+    });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -53,13 +69,31 @@ module.exports = {
   // update entry by id
   updateSupportById: async (req, res) => {
     try {
+      const find = await RetailerModule.findByPk(req.params.id);
+      if (!find)
+      return res.status(404).json({
+        status: 404,
+        msg: `Data found with id : ${req.body.id}`,
+        success: 0,
+      });
+      else {
       const data = await SupportModule.update(req.body, {
         where: {
           support_id: req.params.id,
         },
       });
-      if (data[0] == 1) res.status(200).json("updated successfully...");
-      else res.status(200).json("already updated...");
+      if (data[0]==0)
+      return res.status(200).json({
+        status: 200,
+        msg: `already updated...`,
+        success: 0,
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `updated successfully.`,
+        success: 1,
+      });
+    }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -72,14 +106,31 @@ module.exports = {
   // delete entry by id
   deleteSupportById: async (req, res) => {
     try {
+      const find = await RetailerModule.findByPk(req.params.id);
+      if (!find)
+      return res.status(404).json({
+        status: 404,
+        msg: `Data found with Retailer id : ${req.body.id}`,
+        success: 0,
+      });
+      else {
       const data = await SupportModule.destroy({
         where: {
           support_id: req.params.id,
         },
       });
-      if (data == 0)
-        res.status(200).json("entry not found with id: ", req.params.id);
-      else res.status.json("deleted successfully...");
+      if (data[0]==0)
+      return res.status(200).json({
+        status: 200,
+        msg: `something worng..`,
+        success: 0,
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `deleted successfully.`,
+        success: 1,
+      });
+    }
     } catch (error) {
       return res.status(500).json({
         status: 500,
