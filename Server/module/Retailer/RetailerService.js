@@ -10,7 +10,12 @@ module.exports = {
   getAllRetailer: async (req, res) => {
     try {
       const data = await RetailerModule.findAll();
-      res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        msg: `get all retailer`,
+        success: 1,
+        data:data
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -25,8 +30,18 @@ module.exports = {
     try {
       const data = await RetailerModule.findByPk(req.params.id);
       if (!data)
-        res.status(200).json("data not found with id: ", req.params.id);
-      else res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        msg: `data not found with id: ${req.params.id}`,
+        success: 0,
+        data:data
+      });
+      else res.status(200).json({
+        status: 200,
+        msg: `get one retailer by id`,
+        success: 1,
+        data:data
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -46,14 +61,15 @@ module.exports = {
       if (data[0].length == 0)
         return res.status(200).json({
           status: 200,
-          msg: `Data not found with Retailer email id : ${req.body.email}`,
+          msg: `Data not found with Retailer email  : ${req.body.email}`,
           success: 01,
         });
       else
         return res.status(201).json({
           status: 201,
-          msg: "create new data successfully",
+          msg: `Data found with Retailer email : ${req.body.email}`,
           success: 1,
+          data: data[0]
         });
     } catch (error) {
       return res.status(500).json({
@@ -118,7 +134,11 @@ module.exports = {
     try {
       const find = await RetailerModule.findByPk(req.params.id);
       if (!find)
-        res.status(200).json(`Data not found with fc id :${req.params.id}`);
+      return res.status(404).json({
+        status: 404,
+        msg: `Data found with Retailer id : ${req.body.id}`,
+        success: 0,
+      });
       else {
         const rawData = req.body;
         rawData.updateAt = new Date();
@@ -138,8 +158,16 @@ module.exports = {
             async (err, result) => {}
           );
 
-          res.status(200).json("updated successgully...");
-        } else res.status(200).json("already updated...");
+          return res.status(200).json({
+            status: 200,
+            msg: `Updated successfully...`,
+            success: 1,
+          });
+        } else  return res.status(200).json({
+          status: 200,
+          msg: `alredy updated..`,
+          success: 0,
+        });
       }
     } catch (error) {
       return res.status(500).json({
@@ -189,11 +217,15 @@ module.exports = {
   changeStatusById: async (req, res) => {
     try {
       const find = await RetailerModule.findByPk(req.params.id);
-      if (!find)
+      if (!find)return res.status(500).json({
+        status: 500,
+        msg: `data not found with id :${req.params.id}`,
+        success: 0,
+      });
       if (data[0].length == 0)
       return res.status(200).json({
         status: 200,
-        msg: `Data not found with Retailer email id : ${req.body.email}`,
+        msg: `Data not found with Retailer id : ${req.body.id}`,
         success: 01,
       });
   

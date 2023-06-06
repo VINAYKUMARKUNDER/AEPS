@@ -17,13 +17,18 @@ module.exports = {
   getAllActivity: async (req, res) => {
     try {
       const data = await ActivityModule.findAll();
-      res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg: `data found..`,
+        data: data,
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -31,15 +36,26 @@ module.exports = {
   getOneActivityById: async (req, res) => {
     try {
       const data = await ActivityModule.findByPk(req.params.id);
-      if (!data)
-        res.status(200).json("data not found with id: ", req.params.id);
-      else res.status(200).json(data);
+      if (!data) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found with id: ", ${req.params.id}`,
+          data: {},
+        });
+      } else
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data,
+        });
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -47,52 +63,88 @@ module.exports = {
   createNewActivity: async (req, res) => {
     try {
       const data = await ActivityModule.create(req.body);
-      res.status(201).json("new entry created successfully...");
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg: `created new success`,
+        data: data[0][0],
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
   // update entry
   updateActivity: async (req, res) => {
     try {
+      const find = await distributorModule.findByPk(req.params.id);
+      if (!find) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+          data: {},
+        });
+      }
       const data = await ActivityModule.update(req.body, {
         where: {
-          activity_id: req.params.id,
+          activityId: req.params.id,
         },
       });
-      if (data[0] == 1) res.status(200).json("updated successfully...");
-      else res.status(200).json("already updated...");
+      if (data[0] == 1) {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `updated successfully..`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `already updated..`,
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
   // delete entry
   deleteActivity: async (req, res) => {
     try {
+      const find = await distributorModule.findByPk(req.params.id);
+      if (!find) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+          data: {},
+        });
+      }
       const data = await ActivityModule.destroy({
         where: {
-          activity_id: req.params.id,
+          activityId: req.params.id,
         },
       });
-      if (data == 0)
-        res.status(200).json("entry not found with id: ", req.params.id);
-      else res.status.json("deleted successfully...");
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg: `updated successfully..`,
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -103,39 +155,50 @@ module.exports = {
         `select * from activity where fcId =${req.params.id};`,
         (err, result) => {}
       );
-      return res.status(200).json(data[0]);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg: `data found`,
+        data: data[0],
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
   // get all entry by fc id and date
   getActivityByFcIdAndByDate: async (req, res) => {
     try {
-      const date =req.params.date;
+      const date = req.params.date;
 
       const data = await db.query(
         `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND fcId = ${req.params.id};`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found with date: ${start}`);
-      else {
-      
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -150,20 +213,26 @@ module.exports = {
       WHERE date >= '${start}' AND date <= '${end}' AND fcId = ${req.params.id}`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found bitween dates ${start} and ${end}`);
-      else {
-    
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -174,13 +243,27 @@ module.exports = {
         `select * from activity where distributorId =${req.params.id};`,
         (err, result) => {}
       );
-      return res.status(200).json(data[0]);
+      console.log(data)
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -193,20 +276,26 @@ module.exports = {
         `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND DistributorId = ${req.params.id};`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found with date: ${start}`);
-      else {
-    
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -221,20 +310,26 @@ module.exports = {
       WHERE date >= '${start}' AND date <= '${end}' AND DistributorId = ${req.params.id}`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found bitween dates ${start} and ${end}`);
-      else {
-      
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -245,39 +340,56 @@ module.exports = {
         `select * from activity where RetailerId =${req.params.id};`,
         (err, result) => {}
       );
-      return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
   // get all entry by Retailer id and date
   getActivityByRetailerIdAndByDate: async (req, res) => {
     try {
-     
-
       const data = await db.query(
         `SELECT * FROM activity WHERE DATE(date) = DATE('${req.params.date}')  AND retailerId = ${req.params.id};`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found with date: ${start}`);
-      else {
- 
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 
@@ -292,20 +404,26 @@ module.exports = {
   WHERE date >= '${start}' AND date <= '${end}' AND RetailerId = ${req.params.id}`,
         (err, result) => {}
       );
-      if (data[0].length == 0)
-        return res
-          .status(200)
-          .json(`data not found bitween dates ${start} and ${end}`);
-      else {
-     
-        return res.status(200).json(data[0]);
+      if (data[0].length == 0) {
+        return res.status(200).json({
+          status: 200,
+          success: 0,
+          msg: `data not found`,
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          msg: `data found`,
+          data: data[0],
+        });
       }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         msg: "Internal sarver error!!",
-        success: 0
-    });
+        success: 0,
+      });
     }
   },
 };

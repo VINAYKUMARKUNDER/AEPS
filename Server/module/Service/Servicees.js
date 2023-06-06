@@ -6,7 +6,12 @@ module.exports = {
   getAllService: async (req, res) => {
     try {
       const data = await ServiceModule.findAll();
-      res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg:`data found..`,
+        data: data,
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,

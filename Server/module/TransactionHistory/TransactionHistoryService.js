@@ -17,7 +17,12 @@ module.exports = {
   getAllTransaction: async (req, res) => {
     try {
       const data = await Transaction_historyModule.findAll();
-      return res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        msg:`data found..`,
+        data: data,
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,

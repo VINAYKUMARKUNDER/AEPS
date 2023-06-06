@@ -13,8 +13,9 @@ module.exports = {
       return res.status(200).json({
         status: 200,
         success: 1,
-        data:data
-    });
+        msg:`data found..`,
+        data: data,
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -133,8 +134,14 @@ module.exports = {
   updateDistributorById: async (req, res) => {
     try {
       const find = await distributorModule.findByPk(req.params.id);
-      if (!find)
-        res.status(200).json(`Data not found with fc id :${req.params.id}`);
+      if (!find){
+      return res.status(200).json({
+        status: 200,
+        success: 0,
+        msg:`data not found`,
+        data: {},
+      });
+    }
       else {
         const rawData = req.body;
         rawData.updateAt = new Date();
