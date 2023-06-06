@@ -10,7 +10,11 @@ module.exports = {
   getAllDistributors: async (req, res) => {
     try {
       const data = await distributorModule.findAll();
-      res.status(200).json(data);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        data:data
+    });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -24,8 +28,22 @@ module.exports = {
   getOneDistributorById: async (req, res) => {
     try {
       const data = await distributorModule.findByPk(req.params.id);
-      if (!data) res.status(200).json("data not found with id:", req.params.id);
-      else res.status(200).json(data);
+      if (!data) {
+        res.status(200).json({
+          status:200,
+          msg:`data not found with id:${req.params.id}`,
+          success: 0,
+          data:{}
+        });
+      }
+      else {
+        return res.status(200).json({
+          status: 200,
+          msg:`data found with id:${req.params.id}`,
+          success: 1,
+          data:data
+      });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -43,10 +61,20 @@ module.exports = {
         (err, result) => {}
       );
       if (data[0].length == 0)
-        res
-          .status(404)
-          .json(`Data not found with Distributor email id : ${req.body.email}`);
-      else res.status(200).json(data[0][0]);
+      res.status(200).json({
+        status:200,
+        msg:`data not found with id:${req.params.email}`,
+        success: 0,
+        data:{}
+      });
+      else {
+        return res.status(200).json({
+          status: 200,
+          msg:`data found with id:${req.params.id}`,
+          success: 1,
+          data:data
+      });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -120,8 +148,19 @@ module.exports = {
             `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor updated..",${req.params.id},${find.fcId})`,
             async (err, result) => {}
           );
-          res.status(200).json("updated successgully...");
-        } else res.status(200).json("already updated...");
+          return res.status(200).json({
+            status: 200,
+            msg:`updated successfully`,
+            success: 1,
+        });
+        } else {
+          return res.status(200).json({
+            status: 200,
+            msg:`already updated...`,
+            success: 0,
+            data:data
+        });
+        }
       }
     } catch (error) {
       return res.status(500).json({
@@ -137,7 +176,13 @@ module.exports = {
     try {
       const find = await distributorModule.findByPk(req.params.id);
       if (!find)
-        res.status(200).json(`Data not found with fc id :${req.params.id}`);
+        {
+          return res.status(200).json({
+            status: 200,
+            msg:`data not found with id:${req.params.id}`,
+            success: 0,
+        });
+        }
 
       const data = await distributorModule.destroy({
         where: {
@@ -149,7 +194,13 @@ module.exports = {
         `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor deleted..",${req.params.id},${find.fcId})`,
         async (err, result) => {}
       );
-      res.status(200).json("deleted successfully...");
+      
+        return res.status(200).json({
+          status: 200,
+          msg:`deleted successfully`,
+          success: 1,
+      });
+      
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -163,9 +214,11 @@ module.exports = {
     try {
       const find = await distributorModule.findByPk(req.params.id);
       if (!find)
-        return res
-          .status(404)
-          .json(`Data not found with fc id :${req.params.id}`);
+      return res.status(200).json({
+        status: 200,
+        msg:`data not found with id:${req.params.id}`,
+        success: 0,
+    });
       else {
         const getStatus = find.status;
         if (getStatus) {
@@ -183,7 +236,11 @@ module.exports = {
           `INSERT INTO activity (description,distributorId,fcId) VALUES ("distributor status updated..",${req.params.id},${find.fcId})`,
           async (err, result) => {}
         );
-        res.status(200).json("updated successgully...");
+        return res.status(200).json({
+          status: 200,
+          msg:`status cheanged.`,
+          success: 1,
+      });
       }
     } catch (error) {return res.status(500).json({
       status: 500,
@@ -197,13 +254,22 @@ module.exports = {
     try {
       const find = await distributorModule.findByPk(req.params.id);
       if (!find)
-        res.status(200).json(`Data not found with Distributor id :${req.params.id}`);
+      return res.status(200).json({
+        status: 200,
+        msg:`data not found with id:${req.params.id}`,
+        success: 0,
+    });
       else {
         const data = await db.query(
           `Select * from Retailer WHERE distributorId= ${req.params.id}`,
           (err, result) => {}
         );
-        return res.status(200).json(data[0]);
+        return res.status(200).json({
+          status: 200,
+          msg:`data found with id:${req.params.id}`,
+          success: 1,
+          data:data[0]
+      });
       }
     } catch (error) {
       return res.status(500).json({

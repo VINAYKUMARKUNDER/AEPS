@@ -13,7 +13,11 @@ module.exports = {
   getAllFc: async (req, res) => {
     try {
       const allData = await FcModule.findAll();
-      res.status(200).json(allData);
+      return res.status(200).json({
+        status: 200,
+        success: 1,
+        data:allData
+    });
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -29,7 +33,13 @@ module.exports = {
       const data = await FcModule.findByPk(req.params.id);
       if (!data)
         res.status(200).json(`Data not found with fc id :${req.params.id}`);
-      else res.status(200).json(data);
+      else {
+        return res.status(200).json({
+          status: 200,
+          success: 1,
+          data:data
+      });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
