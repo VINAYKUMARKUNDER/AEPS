@@ -150,7 +150,7 @@ module.exports = {
 
       const data = await db.query(
         `SELECT * FROM transaction_history
-      WHERE transaction_date >= '${start}' AND transaction_date <= '${end}'`,
+      WHERE transactionDate >= '${start}' AND transactionDate <= '${end}'`,
         (err, result) => {}
       );
       if (data[0].length == 0)
@@ -180,8 +180,8 @@ module.exports = {
   getAllTransactionByDistributorId: async (req, res) => {
     try {
       const data = await db.query(
-        `SELECT th.* FROM transaction_history th JOIN retailer r ON th.retailer_id = r.id
-      JOIN distributor d ON r.distibuter_id = d.dist_id WHERE d.dist_id = ${req.params.id}`,
+        `SELECT th.* FROM transaction_history th JOIN retailer r ON th.retailerId = r.id
+      JOIN distributor d ON r.distibuterId = d.distibuterId WHERE d.distibuterId= ${req.params.id}`,
         (err, result) => {}
       );
 
@@ -212,7 +212,7 @@ module.exports = {
   getAllTransactionByRetailerId: async (req, res) => {
     try {
       const data = await db.query(
-        `select * from transaction_history where retailer_id=${req.params.id}`,
+        `select * from transaction_history where retailerId=${req.params.id}`,
         (err, result) => {}
       );
       if (data[0].length == 0)
